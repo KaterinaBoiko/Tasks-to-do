@@ -1,12 +1,4 @@
-@font-face {
-  font-family: "Remachine Script";
-  src: url(../../../assets/fonts/RemachineScript_Personal_Use.ttf);
-}
 
-@font-face {
-  font-family: "Monoglyceride";
-  src: url(../../../assets/fonts/Monoglyceride.ttf);
-}
 
 header {
   display: flex;
@@ -23,7 +15,9 @@ header {
 }
 
 li {
-  display: inline;
+  display: inline-block;
+  width: 150px;
+  word-wrap: break-word;
 }
 
 .main-menu {
@@ -42,14 +36,18 @@ li {
   font-size: 20px;
   text-decoration: none;
   transition: 0.3s;
-  padding: 0 40px;
   display: inline-block;
+  width: inherit;
+  text-align: center;
 }
 
 .main-menu>li:not(:first-child) {
   border-left: 1px solid black;
 }
 
+ul {
+  padding: 0;
+}
 
 .main-menu a:hover,
 .sub-menu a:hover {
@@ -57,22 +55,22 @@ li {
 }
 
 .sub-menu {
-  padding-top: 10px;
+  padding-top: 11px;
+  width: inherit;
   position: absolute;
-  top: 20px;
+  top: 23px;
   left: 0;
   display: none;
   z-index: 10;
-  border: 1px solid black;
 }
-
+.sub-menu li{
+  padding: 2px 0;
+}
 .sub-menu a {
-  padding: 0;
+  width: 100%;
   background: rgba(255, 255, 255, 0.3);
-  border-bottom: 1px solid black;
-  width: inherit;
 }
 
-li:hover .sub-menu {
+.main-menu li:hover .sub-menu {
   display: block;
 }

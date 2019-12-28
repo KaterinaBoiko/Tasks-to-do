@@ -1,6 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~font-awesome/css/font-awesome.css';
-body{
-    margin: 0;
-    background-image: url(assets/images/bg_default.jpg);
+
+@font-face {
+  font-family: "Remachine Script";
+  src: url(../src/assets/fonts/RemachineScript_Personal_Use.ttf);
+}
+
+@font-face {
+  font-family: "Monoglyceride";
+  src: url(../src/assets/fonts/Monoglyceride.ttf);
+}
+
+body {
+  margin: 0;
+  background-image: url(assets/images/bg_default.jpg);
 }

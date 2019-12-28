@@ -1,0 +1,66 @@
+.main {
+  width: 800px;
+  height: 400px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  margin: 120px auto;
+  text-align: center;
+  font-family: 'Monoglyceride', Arial, sans-serif;
+  font-size: 23px;
+}
+
+h1 {
+  padding-top: 30px;
+  font-family: 'Remachine Script', Arial, sans-serif;
+  font-size: 45px;
+  margin-bottom: 0;
+}
+
+h1+p {
+  margin: 10px 0 40px 0;
+}
+
+button {
+  background-color: lavender;
+  padding: 5px 0;
+  width: 150px;
+  border-radius: 5px;
+  border: 2px solid lavender;
+  font-family: inherit;
+  font-size: 18px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+button span {
+  position: relative;
+}
+
+button span:after {
+  font-family: FontAwesome;
+  content: "\f090";
+  font-weight: 400;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+button:last-of-type span:after {
+  content: "\f234";
+}
+
+button:hover span {
+  padding-right: 27px;
+}
+
+button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+button:focus {
+  outline: 0;
+  border: 1px solid rgb(126, 126, 129);
+}
