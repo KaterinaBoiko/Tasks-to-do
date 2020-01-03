@@ -1,0 +1,7 @@
+<p>Users:</p>
+<ul>
+    <li *ngFor="let user of users">
+        {{user.id}} {{ user.username }}
+        <p *ngIf="user.manager != null">{{user.manager.username}}</p>
+    </li>
+</ul>
