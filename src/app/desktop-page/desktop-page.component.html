@@ -5,3 +5,11 @@
         <p *ngIf="user.manager != null">{{user.manager.username}}</p>
     </li>
 </ul>
+
+<p>Desktops:</p>
+<ul>
+    <li *ngFor="let desk of desktops">
+        {{desk.id}} {{ desk.name }} {{ desk.tasks }}
+        <p *ngFor="let task of desk.tasks"> {{ task.name }} </p>
+    </li>
+</ul>

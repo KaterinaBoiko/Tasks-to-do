@@ -1,16 +1,15 @@
-import { User } from './user.model';
 import { Task } from './task.model';
 
 export class Desktop {
     id: number;
     name: string;
     userId: number;
-    tasks: Task[];
+    tasks: Task[] = [];
 
-    constructor(id: number, name: string, user: User){
+    constructor(id: number, name: string, userId: number){
         this.id = id;
         this.name = name;
-        this.userId = user.id;
+        this.userId = userId;
     }
 
     addTask(task: Task): void{

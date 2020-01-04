@@ -9,9 +9,28 @@ enum Status {
 export class Task {
     id: number;
     name: string;
-    description: string;
-    checklist: [boolean, string];
-    user: User;
+    description: string | null;
+    checklist: [boolean, string][] | null;
     status: Status;
-    deadline: Date;
+    deadline: Date | null;
+
+    constructor(id: number, name: string){
+        this.id = id;
+        this.name = name;
+        this.status = Status.toDo;
+    }
+
+    changeName(newName: string): void {
+        this.name = newName;
+    }
+
+    changeDescription(newDescription: string): void {
+        this.description = newDescription;
+    }
+
+    addToChecklist(name: string): void {
+        this.checklist.push([false, name]);
+    }
+
+    //another methods to change task
 }

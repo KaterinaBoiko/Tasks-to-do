@@ -9,6 +9,8 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { UserService } from './shared/services/user.service';
 import { DesktopPageComponent } from './desktop-page/desktop-page.component';
+import { ManagerService } from './shared/services/manager.service';
+import { DesktopService } from './shared/services/desktop.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { DesktopPageComponent } from './desktop-page/desktop-page.component';
     FormsModule
   ],
   providers: [
-    UserService
+    UserService,
+    DesktopService,
+    ManagerService
   ],
   bootstrap: [AppComponent]
 })

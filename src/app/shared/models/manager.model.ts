@@ -4,11 +4,11 @@ import { Desktop } from './desktop.model';
 export class Manager extends User{
     desktops: Desktop[] = [];
 
-    constructor(id: number, username: string, password: string, email?: string) {
+    constructor(id: number, username: string, password: string, email: string) {
         super(id, username, password, email);
     }
 
-    addDesktop(desktop: Desktop): void{
-        this.desktops.push(desktop);
+    addSubordinatesDesktop(userId: number): void {
+        this.desktops.push(new Desktop(0, 'Default', userId));//???? desktop id
     }
 }
