@@ -1,0 +1,18 @@
+<div mat-dialog-content >
+    <mat-form-field>
+        <input matInput name="username" [(ngModel)]="data.username" placeholder="Enter your username" #username="ngModel" required />
+    </mat-form-field>
+    <div class="error" [hidden]="username.valid || username.untouched">
+        Username is <strong>required</strong>
+    </div>
+    <mat-form-field>
+        <input matInput [(ngModel)]="data.password" placeholder="Enter your password" autocomplete="off">
+        <mat-error *ngIf="false">
+            Password is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>

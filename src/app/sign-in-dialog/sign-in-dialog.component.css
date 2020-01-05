@@ -1,0 +1,57 @@
+div {
+  font-family: 'Monoglyceride', Arial, sans-serif;
+}
+
+mat-form-field {
+  width: 300px;
+}
+
+.mat-dialog-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  color: rgb(81, 82, 81) !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  background-color: rgb(136, 136, 136) !important;
+}
+
+.mat-dialog-actions {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+button {
+  background-color: lavender;
+  padding: 5px 0;
+  width: 120px;
+  border-radius: 5px;
+  border: 2px solid lavender;
+  font-family: inherit;
+  font-size: 18px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: 0;
+}
+
+button:hover {
+  background-color: rgba(230, 230, 250, 0.26);
+}
+
+.error {
+  line-height: 1.2em;
+  transform: translateY(10px);
+  font-size: 75%;
+  color: red;
+  position: absolute;
+  
+}
