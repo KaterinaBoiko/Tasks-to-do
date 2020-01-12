@@ -10,21 +10,17 @@ export class UserService {
 
   constructor() { }
 
-  setDefaultUsers(): void {
-    let defaultUsers = [
-      new User(0, 'Kateryna', 'qwerty', 'katerina.boiko16@gmail.com'),
-      new User(1, 'Dmytro', '1111', 'naumthebest'),
-      new User(2, 'Mary', 'mashka', null)
-    ];
-    localStorage.setItem('users', JSON.stringify(defaultUsers));
-  }
-
   getUsers(): User[] {
     if (localStorage.getItem('users') === '[]' || localStorage.getItem('users') === null)
       this.setDefaultUsers();
     this.users = JSON.parse(localStorage.getItem('users'));
     //this.removeUser(3);
     return this.users;
+  }
+
+  findUser(username: string, password: string): User {
+    return this.users.find(user => user.username == username
+      && user.password == password);
   }
 
   addUser(user: User): void {
@@ -52,5 +48,14 @@ export class UserService {
 
   getNextId(): number {
     return this.users.length;
+  }
+
+  setDefaultUsers(): void {
+    let defaultUsers = [
+      new User(0, 'Kateryna', 'qwerty', 'katerina.boiko16@gmail.com'),
+      new User(1, 'Dmytro', '1111', 'naumthebest'),
+      new User(2, 'Mary', 'mashka', null)
+    ];
+    localStorage.setItem('users', JSON.stringify(defaultUsers));
   }
 }

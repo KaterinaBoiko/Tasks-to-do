@@ -11,7 +11,7 @@ mat-form-field {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  position: relative;
+  padding: 10px;
 }
 
 ::ng-deep .mat-focused .mat-form-field-label {
@@ -51,7 +51,12 @@ button:hover {
   line-height: 1.2em;
   transform: translateY(10px);
   font-size: 75%;
-  color: red;
+  /* color: rxed; */
   position: absolute;
-  
+  left: 0;
+}
+
+button:disabled{
+  background-color: #cccccc;
+  color: #666666;
 }

@@ -17,10 +17,6 @@ export class SignInDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<SignInDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: SignInData) { }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
   ngOnInit() {
   }
 

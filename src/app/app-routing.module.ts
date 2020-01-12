@@ -7,7 +7,7 @@ import { DesktopPageComponent } from './desktop-page/desktop-page.component';
 const routes: Routes = [
   { path: 'main', component: MainPageComponent},
   { path: 'desktop', component: DesktopPageComponent},
-  //{ path: '**', redirectTo: 'main', pathMatch: 'full'}
+  { path: '**', redirectTo: '/desktop', pathMatch: 'full'}
 ];
 
 @NgModule({

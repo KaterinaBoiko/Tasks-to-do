@@ -11,6 +11,7 @@ export class Task {
     name: string;
     description: string | null;
     checklist: [boolean, string][] | null;
+    readiness: number;
     status: Status;
     deadline: Date | null;
 

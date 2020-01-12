@@ -10,13 +10,6 @@ export class ManagerService {
 
   constructor() { }
 
-  setDefaultManagers(): void {
-    let defaultManagers = [
-      new Manager(0, 'admin', '1111', null)
-    ];
-    localStorage.setItem('managers', JSON.stringify(defaultManagers));
-  }
-
   getManagers(): Manager[] {
     if (localStorage.getItem('managers') === '[]' || localStorage.getItem('managers') === null) 
       this.setDefaultManagers();
@@ -24,7 +17,19 @@ export class ManagerService {
     return this.managers;
   }
 
+  findManager(username: string, password: string): Manager {
+    return this.managers.find(manager => manager.username == username
+      && manager.password == password);
+  }
+
   getNextId(): number {
     return this.managers.length;
+  }
+  
+  setDefaultManagers(): void {
+    let defaultManagers = [
+      new Manager(0, 'admin', '1111', null)
+    ];
+    localStorage.setItem('managers', JSON.stringify(defaultManagers));
   }
 }

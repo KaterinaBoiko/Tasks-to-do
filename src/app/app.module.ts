@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatDialogModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatDialogModule, MatFormFieldModule, MatInputModule, MatSnackBarModule  } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,7 +14,8 @@ import { UserService } from './shared/services/user.service';
 import { DesktopPageComponent } from './desktop-page/desktop-page.component';
 import { ManagerService } from './shared/services/manager.service';
 import { DesktopService } from './shared/services/desktop.service';
-import { SignInDialogComponent } from './sign-in-dialog/sign-in-dialog.component';
+import { SignInDialogComponent } from './dialogs/sign-in-dialog/sign-in-dialog.component';
+import { TaskOverviewDialogComponent } from './dialogs/task-overview-dialog/task-overview-dialog.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { SignInDialogComponent } from './sign-in-dialog/sign-in-dialog.component
     WelcomePageComponent,
     MainPageComponent,
     DesktopPageComponent,
-    SignInDialogComponent
+    SignInDialogComponent,
+    TaskOverviewDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,9 @@ import { SignInDialogComponent } from './sign-in-dialog/sign-in-dialog.component
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSnackBarModule,
+    DragDropModule
   ],
   providers: [
     UserService,
@@ -40,7 +45,8 @@ import { SignInDialogComponent } from './sign-in-dialog/sign-in-dialog.component
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    SignInDialogComponent
+    SignInDialogComponent,
+    TaskOverviewDialogComponent
   ]
 })
 export class AppModule { }
