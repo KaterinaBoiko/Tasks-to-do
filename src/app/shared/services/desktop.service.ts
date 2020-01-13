@@ -18,8 +18,15 @@ export class DesktopService {
     return this.desktops;
   }
 
-  getNextId(): number {
+  saveDesktops(): void {
+    localStorage.setItem('desktops', JSON.stringify(this.desktops));
+  }
+  getNextDesktopId(): number {
     return this.desktops.length;
+  }
+
+  getNextTaskIdByDesktopId(desktopId: number) : number {
+    return this.desktops.find(x => x.id == desktopId).tasks.length;
   }
 
   getDesktopsByUserId(id: number): Desktop[]{
@@ -33,8 +40,8 @@ export class DesktopService {
     desk1.addTask(new Task(0, 'think about structure of project'));
     desk1.addTask(new Task(1, 'start doing project'));
     desk1.addTask(new Task(2, 'make header'));
-    desk1.addTask(new Task(46, 'yyyyy'));
-    desk2.addTask(new Task(2, 'wake up!'));
+    desk1.addTask(new Task(3, 'yyyyy'));
+    desk2.addTask(new Task(4, 'wake up!'));
     defaultDesktops.push(desk1, desk2)
 
     localStorage.setItem('desktops', JSON.stringify(defaultDesktops));

@@ -7,14 +7,14 @@ import { LoginService } from '../shared/services/login.service';
 import { Task } from '../shared/models/task.model';
 import { TaskOverviewDialogComponent } from '../dialogs/task-overview-dialog/task-overview-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDragEnd } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-desktop-page',
   templateUrl: './desktop-page.component.html',
   styleUrls: ['./desktop-page.component.css']
 })
-  
+
 export class DesktopPageComponent implements OnInit {
 
   currUser: User;
@@ -30,6 +30,9 @@ export class DesktopPageComponent implements OnInit {
     console.log(this.currUser);
     this.currDesktop = this.deskService.getDesktopsByUserId(this.currUser.id)[0];
     this.currTasks = this.currDesktop.tasks;
+    // this.currTasks.forEach(e => {
+    //   console.log(e);
+    // });
   }
 
   openTaskOverview(id: number): void {
@@ -49,7 +52,8 @@ export class DesktopPageComponent implements OnInit {
   }
 
   addTask(statusNumber: number): void {
-    let newTask = new Task(4, 'new task');
+    let taskId = this.deskService.getNextTaskIdByDesktopId(this.currDesktop.id);
+    let newTask = new Task(taskId, 'new task');
     newTask.status = statusNumber;
     this.currTasks.push(newTask);
   }
@@ -64,16 +68,24 @@ export class DesktopPageComponent implements OnInit {
 
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      let taskToMove = this.currTasks.splice(event.previousIndex, 1);
+      this.currTasks.splice(event.currentIndex, 0, taskToMove[0]);
+
     } else {
       transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex);
-        //this.getTasksByStatus
-        console.log("event.previousContainer.data[x] " + " " + JSON.stringify(event.previousContainer.data[0], null, 4));
-
-
-
+        event.currentIndex)
+      let currTaskId = JSON.parse(JSON.stringify(event.container.data[event.currentIndex].id));
+      let newStatus = JSON.parse(JSON.stringify(Number(event.container.id.substring(event.container.id.length - 1))));
+      this.currTasks.find(x => x.id == currTaskId).status = newStatus;
     }
+    // console.log("event.previousContainer.data " + " " + JSON.stringify(event.previousContainer.data, null, 4));
+    // console.log("event.container.data " + " " + JSON.stringify(event.container.data, null, 4));
+    console.log(JSON.parse(JSON.stringify(event.container.data[event.currentIndex])));
+    console.log(JSON.parse(JSON.stringify(event.container.data[event.previousIndex])));
+    this.deskService.saveDesktops();
   }
+
+
 }
