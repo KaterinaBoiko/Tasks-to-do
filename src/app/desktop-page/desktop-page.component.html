@@ -29,7 +29,7 @@
         [cdkDropListData]="getTasksByStatus(2)" 
         [cdkDropListConnectedTo]="[inProgressList]"
         (cdkDropListDropped)="drop($event)">
-            <div class="task" *ngFor="let task of getTasksByStatus(2)" cdkDrag>{{ task.name }}</div>
+            <div class="task" *ngFor="let task of getTasksByStatus(2)" (click)="openTaskOverview(task.id)" cdkDrag>{{ task.name }}</div>
         </div>
         <i class="fa fa-plus" (click)="addTask(2)"></i>
     </div>

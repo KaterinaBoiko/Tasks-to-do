@@ -20,7 +20,8 @@ h1 {
 }
 
 .cdk-drop-list {
-  min-height: 20px;
+  min-height: 50px;
+  padding-bottom: 20px;
 }
 
 .task {
@@ -34,7 +35,7 @@ h1 {
 }
 
 i {
-  margin: 50px 0 20px;
+  margin: 20px;
   padding: 5px 5px 2px;
   cursor: pointer;
 }

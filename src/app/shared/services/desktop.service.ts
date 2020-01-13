@@ -19,6 +19,9 @@ export class DesktopService {
   }
 
   saveDesktops(): void {
+    this.desktops.forEach(e => {
+      e.tasks.sort((a, b) => a.status - b.status )
+    });
     localStorage.setItem('desktops', JSON.stringify(this.desktops));
   }
   getNextDesktopId(): number {
