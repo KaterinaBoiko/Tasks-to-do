@@ -1,9 +1,16 @@
-<h1> {{ task.name }} </h1>
-<i class="fa fa-align-justify"></i><p class="title">Description</p>
-<p > {{ task.description }} fbfgbhdhgfghtghdrthfgbtg trg rgаптиапи паи апи ап ивпаивпер кеапркеsrsg g tr sgg</p>
-<i class="fas fa-tasks"></i><p class="title">Checklist</p>
-<p > {{ task.description }} fbfgbhdhgfghtghdrthfgbtg trg rgаптиапи паи апи ап ивпаивпер кеапркеsrsg g tr sgg</p>
-<i class="fas fa-spinner"></i><p class="title">Readiness</p>
-<p > {{ task.description }} fbfgbhdhgfghtghdrthfgbtg trg rgаптиапи паи апи ап ивпаивпер кеапркеsrsg g tr sgg</p>
-<i class="far fa-calendar-times"></i><p class="title">Deadline</p>
-<p > {{ task.description }} fbfgbhdhgfghtghdrthfgbtg trg rgаптиапи паи апи ап ивпаивпер кеапркеsrsg g tr sgg</p>
+<input class="name" [(ngModel)]="task.name">  
+
+<i class="fa fa-align-justify"></i>
+<p class="title">Description</p>
+<textarea class="data" [(ngModel)]="task.description"></textarea>
+
+<i class="fas fa-tasks"></i>
+<p class="title">Checklist</p>
+<textarea class="data" [(ngModel)]="task.checklist"></textarea>
+
+<i class="fas fa-spinner"></i>
+<p class="title">Readiness</p>
+<mat-progress-bar mode="determinate" value="{{task.readiness}}"></mat-progress-bar>
+
+<i class="far fa-calendar-times"></i>
+<p class="title">Deadline</p>

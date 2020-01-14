@@ -56,11 +56,12 @@ export class DesktopPageComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<Task[]>) {
+    let currTaskId: number, prevIndex: number, newIndex : number;
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      let currTaskId = JSON.parse(JSON.stringify(event.container.data[event.currentIndex].id));
-      let prevIndex = this.currTasks.findIndex(x => x.id === currTaskId);
-      let newIndex = prevIndex - event.previousIndex + event.currentIndex;
+      currTaskId = JSON.parse(JSON.stringify(event.container.data[event.currentIndex].id));
+      prevIndex = this.currTasks.findIndex(x => x.id === currTaskId);
+      newIndex = prevIndex - event.previousIndex + event.currentIndex;
       this.currTasks.splice(newIndex, 0, this.currTasks.splice(prevIndex, 1)[0]);
     }
     else {
@@ -68,18 +69,15 @@ export class DesktopPageComponent implements OnInit {
         event.container.data,
         event.previousIndex,
         event.currentIndex)
-      let currTaskId = JSON.parse(JSON.stringify(event.container.data[event.currentIndex].id));
+      currTaskId = JSON.parse(JSON.stringify(event.container.data[event.currentIndex].id));
       let newStatus = JSON.parse(JSON.stringify(Number(event.container.id.substring(event.container.id.length - 1))));
       this.currTasks.find(x => x.id == currTaskId).status = newStatus;
-      let prevIndex = this.currTasks.findIndex(x => x.id === currTaskId);
-      let newIndex = prevIndex - event.previousIndex + event.currentIndex;
+      prevIndex = this.currTasks.findIndex(x => x.id === currTaskId);
+      newIndex = event.currentIndex;
+      for(let i = 0; i < newStatus; i++){
+        newIndex += this.currTasks.filter(x => x.status === i).length;
+      }
       this.currTasks.splice(newIndex, 0, this.currTasks.splice(prevIndex, 1)[0]);
-      console.log('event.previousIndex '  + event.previousIndex);
-      console.log('event.currentIndex '  + event.currentIndex);
-      console.log('prevIndex '  + prevIndex);
-      console.log('newIndex '  + newIndex);
-      console.log('currTaskId '  + currTaskId);
-      console.log('newStatus '  + newStatus);
     }
     this.deskService.saveDesktops();
   }

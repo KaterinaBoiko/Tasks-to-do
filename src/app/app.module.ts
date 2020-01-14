@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MatDialogModule, MatFormFieldModule, MatInputModule, MatSnackBarModule  } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,7 +37,8 @@ import { TaskOverviewDialogComponent } from './dialogs/task-overview-dialog/task
     MatInputModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    DragDropModule
+    DragDropModule,
+    MatProgressBarModule
   ],
   providers: [
     UserService,

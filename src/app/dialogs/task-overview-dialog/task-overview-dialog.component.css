@@ -1,4 +1,16 @@
-h1 {
+input,
+textarea {
+  border: 0;
+  outline: none;
+  display: block;
+}
+
+input:focus,
+textarea:focus {
+  outline: black;
+}
+
+.name {
   font-family: 'Monoglyceride', Arial, sans-serif;
   font-size: 20px;
   cursor: default;
@@ -13,7 +25,8 @@ h1 {
   cursor: default;
 }
 
-p {
+p,
+.data {
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   font-size: 15px;
 }
