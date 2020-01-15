@@ -19,6 +19,7 @@ export class Task {
         this.id = id;
         this.name = name;
         this.status = Status.toDo;
+        this.checklist = [];
     }
 
     changeName(newName: string): void {

@@ -8,6 +8,7 @@ import { Task } from '../shared/models/task.model';
 import { TaskOverviewDialogComponent } from '../dialogs/task-overview-dialog/task-overview-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDragEnd } from '@angular/cdk/drag-drop';
+import { HeaderComponent } from '../shared/header/header.component';
 
 @Component({
   selector: 'app-desktop-page',
@@ -30,17 +31,22 @@ export class DesktopPageComponent implements OnInit {
     console.log(this.currUser);
     this.currDesktop = this.deskService.getDesktopsByUserId(this.currUser.id)[0];
     this.currTasks = this.currDesktop.tasks;
+    this.deskService.getCurrentDesktop().subscribe(desktop => {
+        this.currDesktop = desktop;
+        this.currTasks = this.currDesktop.tasks;
+    });
   }
 
   openTaskOverview(id: number): void {
-    console.log(id);
     const dialogRef = this.dialog.open(TaskOverviewDialogComponent, {
       width: '400px',
-      data: { task: this.currDesktop.tasks.find(x => x.id == id) }
+      data: { task: this.currDesktop.tasks.find(x => x.id == id) },
+      autoFocus: false
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
+      this.deskService.saveDesktops();
     });
   }
 
@@ -53,10 +59,20 @@ export class DesktopPageComponent implements OnInit {
     let newTask = new Task(taskId, 'new task');
     newTask.status = statusNumber;
     this.currTasks.push(newTask);
+    this.deskService.saveDesktops();
+  }
+
+  deleteTask(id: number): void {
+    console.log(id);
+    let index = this.currTasks.findIndex(x => x.id == id);
+    console.log(index);
+    this.currTasks.splice(index, 1);
+    console.log(this.currTasks);
+    this.deskService.saveDesktops();
   }
 
   drop(event: CdkDragDrop<Task[]>) {
-    let currTaskId: number, prevIndex: number, newIndex : number;
+    let currTaskId: number, prevIndex: number, newIndex: number;
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       currTaskId = JSON.parse(JSON.stringify(event.container.data[event.currentIndex].id));
@@ -74,7 +90,7 @@ export class DesktopPageComponent implements OnInit {
       this.currTasks.find(x => x.id == currTaskId).status = newStatus;
       prevIndex = this.currTasks.findIndex(x => x.id === currTaskId);
       newIndex = event.currentIndex;
-      for(let i = 0; i < newStatus; i++){
+      for (let i = 0; i < newStatus; i++) {
         newIndex += this.currTasks.filter(x => x.status === i).length;
       }
       this.currTasks.splice(newIndex, 0, this.currTasks.splice(prevIndex, 1)[0]);

@@ -22,7 +22,7 @@ export class LoginService {
 
   constructor(private userService: UserService,
     private managerService: ManagerService) { 
-      this.authorizedPerson = this.userService.getUsers()[0];
+      this.authorizedPerson = this.userService.getUsers()[0];//!!!
     }
 
   getAuthorizedPerson() : any {

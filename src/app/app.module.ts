@@ -1,10 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatDialogModule, MatFormFieldModule, MatInputModule, MatSnackBarModule  } from '@angular/material';
+import { MatDialogModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatNativeDateModule, MAT_DATE_LOCALE  } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,12 +42,18 @@ import { TaskOverviewDialogComponent } from './dialogs/task-overview-dialog/task
     BrowserAnimationsModule,
     MatSnackBarModule,
     DragDropModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    TextFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCheckboxModule,
+    MatTooltipModule
   ],
   providers: [
     UserService,
     DesktopService,
-    ManagerService
+    ManagerService,
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
   ],
   bootstrap: [AppComponent],
   entryComponents: [

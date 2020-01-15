@@ -11,15 +11,17 @@
     </div>
     <nav>
         <ul class="main-menu">
-            <li><a href="#">Create</a>
+            <!-- <li><a href="#">Create</a>
                 <ul class="sub-menu">
                     <li><a href="#">Desktop</a></li>
                 </ul>
-            </li>
+            </li> -->
             <li><a href="/desktop">Desktops</a>
                 <ul class="sub-menu">
-                    <li><a href="#">Default desktop</a></li>
-                    <li><a href="#">Bdfbhfhfgvhnfgh</a></li>
+                    <li *ngFor="let desk of currDesktops">
+                        <a href="javascript:;" (click)="changeDesktop(desk)"> {{ desk.name }} </a>
+                    </li>
+                    <li><a href="javascript:;"> New </a></li>
                 </ul>
             </li>
             <li><a href="#">Settings</a>

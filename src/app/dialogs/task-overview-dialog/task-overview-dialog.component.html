@@ -1,16 +1,27 @@
-<input class="name" [(ngModel)]="task.name">  
+<input class="name" [(ngModel)]="task.name">
 
 <i class="fa fa-align-justify"></i>
 <p class="title">Description</p>
-<textarea class="data" [(ngModel)]="task.description"></textarea>
+<textarea class="data" [(ngModel)]="task.description" placeholder="Add description to your task" matInput
+    cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="7"></textarea>
 
 <i class="fas fa-tasks"></i>
 <p class="title">Checklist</p>
-<textarea class="data" [(ngModel)]="task.checklist"></textarea>
-
+<div *ngFor="let item of task.checklist; index as i" class="check">
+    <i class="fas fa-minus" (click)="deleteItem(i)"></i>
+    <mat-checkbox [(ngModel)]="item[0]" (change)="calcReadiness()" >
+        <input class="checktext" [(ngModel)]="item[1]">
+    </mat-checkbox>
+</div>
+<button (click)="addItem()">Add item</button>
 <i class="fas fa-spinner"></i>
-<p class="title">Readiness</p>
+<p class="title" matTooltip="Progress is based on your checklist" matTooltipPosition="after">Readiness</p>
 <mat-progress-bar mode="determinate" value="{{task.readiness}}"></mat-progress-bar>
 
 <i class="far fa-calendar-times"></i>
 <p class="title">Deadline</p>
+<mat-form-field class="date">
+    <input matInput [matDatepicker]="picker" [(ngModel)]="task.deadline">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
