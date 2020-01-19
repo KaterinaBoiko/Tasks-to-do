@@ -36,5 +36,4 @@ export class WelcomePageComponent implements OnInit {
   openSnackBar(message: string) {
     this._snackBar.open(message, 'OK', {duration: 3000});
   }
-
 }

@@ -13,9 +13,6 @@ export class DesktopService {
 
   private desktop: Subject<Desktop> = new Subject();
   public desktopEmitter = this.desktop.asObservable();
-  getCurrentDesktop(): Observable<any> {
-    return this.desktop.asObservable();
-  }
 
   setCurrentDesktop(desk: Desktop): void {
     this.currentDesktop = desk;
@@ -40,7 +37,7 @@ export class DesktopService {
     return this.desktops.length;
   }
 
-  getNextTaskIdByDesktopId(desktopId: number): number {
+  getNextTaskIdByDesktopId(): number {
     let len = 0;
     this.desktops.forEach(x => {
       len += x.tasks.length;
@@ -61,6 +58,7 @@ export class DesktopService {
     task1.checklist = [[true, "do it first"], [false, "do it then"], [false, "somth else"]];
     task1.readiness = 25;
     task1.deadline = new Date(2020, 1, 1);
+    task1.status = 1;
     desk1.addTask(new Task(0, 'think about structure of project'));
     desk1.addTask(new Task(1, 'start doing project'));
     desk1.addTask(new Task(2, 'make header'));

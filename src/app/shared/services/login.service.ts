@@ -4,6 +4,8 @@ import { Manager } from '../models/manager.model';
 import { UserService } from './user.service';
 import { ManagerService } from './manager.service';
 import { Subject, Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { DesktopService } from './desktop.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,20 +14,23 @@ export class LoginService {
 
   private authorizedPerson: User | Manager | null;
 
-  private user = new Subject<any>();
-  public userEmitter = this.user.asObservable();
+  private authorizedPersonSubject = new Subject<User | Manager | null>();
+  public userEmitter = this.authorizedPersonSubject.asObservable();
 
-  userEmitChange(): Observable<any> {
-    console.log(this.user);
-    return this.user.asObservable();
-  }
+  // userEmitChange(): Observable<any> {
+  //   console.log(this.authorizedPersonSubject);
+  //   return this.authorizedPersonSubject.asObservable();
+  // }
 
   constructor(private userService: UserService,
-    private managerService: ManagerService) { 
-      this.authorizedPerson = this.userService.getUsers()[0];//!!!
-    }
+    private managerService: ManagerService,
+    private deskService: DesktopService,
+    private router: Router) {
+    this.authorizedPerson = JSON.parse(localStorage.getItem('authorizedPerson'));
+    //this.authorizedPerson = this.userService.getUsers()[0];//!!!
+  }
 
-  getAuthorizedPerson() : any {
+  getAuthorizedPerson(): any {
     return this.authorizedPerson;
   }
 
@@ -33,17 +38,25 @@ export class LoginService {
     let currUser = this.userService.findUser(username, password);
     if (!currUser) {
       let currManager = this.managerService.findManager(username, password);
-      if (!currManager)
+      if (!currManager) {
+        localStorage.setItem('authorizedPerson', null);
         return false;
+      }
       else {
         this.authorizedPerson = currManager;
-        this.user.next(this.authorizedPerson);
+        this.authorizedPersonSubject.next(this.authorizedPerson);
+        this.router.navigateByUrl('/manager');
+        localStorage.setItem('authorizedPerson', JSON.stringify(this.authorizedPerson));
         return true;
       }
     }
     else {
       this.authorizedPerson = currUser;
-      this.user.next(this.authorizedPerson);
+      this.authorizedPersonSubject.next(this.authorizedPerson);
+      this.router.navigateByUrl(`/desktop`);
+      localStorage.setItem('authorizedPerson', JSON.stringify(this.authorizedPerson));
+      let currDesktopId = this.deskService.getDesktopsByUserId(this.authorizedPerson.id)[0].id;
+      localStorage.setItem('currentDesktopId', currDesktopId.toString());
       return true;
     }
   }

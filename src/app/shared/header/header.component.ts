@@ -3,6 +3,7 @@ import { LoginService } from '../services/login.service';
 import { Desktop } from '../models/desktop.model';
 import { DesktopService } from '../services/desktop.service';
 import { Subject, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -23,7 +24,8 @@ export class HeaderComponent implements OnInit {
   // } 
 
   constructor(private loginService: LoginService,
-    private deskService: DesktopService) { }
+    private deskService: DesktopService,
+    private router: Router) { }
 
   ngOnInit() {
     this.userId = this.loginService.getAuthorizedPerson().id;
@@ -33,4 +35,9 @@ export class HeaderComponent implements OnInit {
   changeDesktop(desktop: Desktop): void{
     this.deskService.setCurrentDesktop(desktop);
   }
-}
+
+  logOut(): void {
+    localStorage.setItem('authorizedPerson', null);
+    this.router.navigateByUrl('/');
+  }
+}        

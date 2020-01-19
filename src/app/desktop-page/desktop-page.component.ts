@@ -29,11 +29,14 @@ export class DesktopPageComponent implements OnInit {
   ngOnInit() {
     this.currUser = this.loginService.getAuthorizedPerson();
     console.log(this.currUser);
-    this.currDesktop = this.deskService.getDesktopsByUserId(this.currUser.id)[0];
+    let currDeskId = JSON.parse(localStorage.getItem('currentDesktopId'));
+    this.currDesktop = this.deskService.desktops.find(x => x.id == currDeskId);
     this.currTasks = this.currDesktop.tasks;
-    this.deskService.getCurrentDesktop().subscribe(desktop => {
+
+    this.deskService.desktopEmitter.subscribe(desktop => {
         this.currDesktop = desktop;
         this.currTasks = this.currDesktop.tasks;
+        localStorage.setItem('currentDesktopId', desktop.id.toString());
     });
   }
 
@@ -55,7 +58,7 @@ export class DesktopPageComponent implements OnInit {
   }
 
   addTask(statusNumber: number): void {
-    let taskId = this.deskService.getNextTaskIdByDesktopId(this.currDesktop.id);
+    let taskId = this.deskService.getNextTaskIdByDesktopId();
     let newTask = new Task(taskId, 'new task');
     newTask.status = statusNumber;
     this.currTasks.push(newTask);
@@ -86,7 +89,7 @@ export class DesktopPageComponent implements OnInit {
         event.previousIndex,
         event.currentIndex)
       currTaskId = JSON.parse(JSON.stringify(event.container.data[event.currentIndex].id));
-      let newStatus = JSON.parse(JSON.stringify(Number(event.container.id.substring(event.container.id.length - 1))));
+      let newStatus = JSON.parse(JSON.stringify(Number(event.container.id.substring(event.container.id.length - 1))%3));
       this.currTasks.find(x => x.id == currTaskId).status = newStatus;
       prevIndex = this.currTasks.findIndex(x => x.id === currTaskId);
       newIndex = event.currentIndex;

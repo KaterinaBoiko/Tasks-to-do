@@ -21,6 +21,8 @@ import { ManagerService } from './shared/services/manager.service';
 import { DesktopService } from './shared/services/desktop.service';
 import { SignInDialogComponent } from './dialogs/sign-in-dialog/sign-in-dialog.component';
 import { TaskOverviewDialogComponent } from './dialogs/task-overview-dialog/task-overview-dialog.component';
+import { ManagerPageComponent } from './manager-page/manager-page.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { TaskOverviewDialogComponent } from './dialogs/task-overview-dialog/task
     MainPageComponent,
     DesktopPageComponent,
     SignInDialogComponent,
-    TaskOverviewDialogComponent
+    TaskOverviewDialogComponent,
+    ManagerPageComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
