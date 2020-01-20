@@ -8,7 +8,6 @@ import { Task } from '../shared/models/task.model';
 import { TaskOverviewDialogComponent } from '../dialogs/task-overview-dialog/task-overview-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDragEnd } from '@angular/cdk/drag-drop';
-import { HeaderComponent } from '../shared/header/header.component';
 
 @Component({
   selector: 'app-desktop-page',
@@ -31,12 +30,14 @@ export class DesktopPageComponent implements OnInit {
     console.log(this.currUser);
     let currDeskId = JSON.parse(localStorage.getItem('currentDesktopId'));
     this.currDesktop = this.deskService.desktops.find(x => x.id == currDeskId);
+    //this.currDesktop = this.deskService.getDesktopsByUserId(this.currUser.id)[0];
+
     this.currTasks = this.currDesktop.tasks;
 
     this.deskService.desktopEmitter.subscribe(desktop => {
-        this.currDesktop = desktop;
-        this.currTasks = this.currDesktop.tasks;
-        localStorage.setItem('currentDesktopId', desktop.id.toString());
+      this.currDesktop = desktop;
+      this.currTasks = this.currDesktop.tasks;
+      localStorage.setItem('currentDesktopId', desktop.id.toString());
     });
   }
 
@@ -49,6 +50,10 @@ export class DesktopPageComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
+      console.log(this.currDesktop);
+      console.log(this.deskService.desktops[0]);
+      this.deskService.desktops[0] = this.currDesktop;//????
+      console.log(this.deskService.desktops[0]);
       this.deskService.saveDesktops();
     });
   }
@@ -63,6 +68,8 @@ export class DesktopPageComponent implements OnInit {
     newTask.status = statusNumber;
     this.currTasks.push(newTask);
     this.deskService.saveDesktops();
+    console.log(this.currTasks);
+    console.log(this.deskService.desktops[0].tasks);
   }
 
   deleteTask(id: number): void {
@@ -89,7 +96,7 @@ export class DesktopPageComponent implements OnInit {
         event.previousIndex,
         event.currentIndex)
       currTaskId = JSON.parse(JSON.stringify(event.container.data[event.currentIndex].id));
-      let newStatus = JSON.parse(JSON.stringify(Number(event.container.id.substring(event.container.id.length - 1))%3));
+      let newStatus = JSON.parse(JSON.stringify(Number(event.container.id.substring(event.container.id.length - 1)) % 3));
       this.currTasks.find(x => x.id == currTaskId).status = newStatus;
       prevIndex = this.currTasks.findIndex(x => x.id === currTaskId);
       newIndex = event.currentIndex;

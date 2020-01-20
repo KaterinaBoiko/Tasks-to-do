@@ -1,9 +1,7 @@
-import { User } from './user.model';
-
-enum Status {
-    toDo,
-    inProgress,
-    done
+export enum Status {
+    ToDo,
+    InProgress,
+    Done
 }
 
 export class Task {
@@ -18,7 +16,7 @@ export class Task {
     constructor(id: number, name: string){
         this.id = id;
         this.name = name;
-        this.status = Status.toDo;
+        this.status = Status.ToDo;
         this.checklist = [];
     }
 
@@ -34,5 +32,8 @@ export class Task {
         this.checklist.push([false, name]);
     }
 
+    getStatusValue(key: number): string{
+        return Status[key];
+    }
     //another methods to change task
 }

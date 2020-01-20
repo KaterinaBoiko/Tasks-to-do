@@ -1,2 +1,14 @@
 <app-header></app-header>
-<p>manager-page works!</p>
+<div class="main">
+    <div class="desktop" *ngFor="let desk of currDesktops">
+        <div class="deskHeader">
+            <input class="deskName" [(ngModel)]="desk.name">
+            <i class="fa fa-plus" (click)="addTask(desk.id)"></i>
+        </div>
+        <div class="task" *ngFor="let task of desk.tasks" (click)="openTaskOverview(desk, task.id)">
+            <div class="taskName">{{ task.name }}</div>
+            <div class="taskStatus">{{ Status[task.status] }}</div>
+            <div class="taskReadiness">{{ roundNumber(task.readiness) || 0}}%</div>
+        </div>
+    </div>
+</div>

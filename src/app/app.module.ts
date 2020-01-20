@@ -9,6 +9,7 @@ import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTableModule } from '@angular/material/table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -51,7 +52,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MatDatepickerModule,
     MatNativeDateModule,
     MatCheckboxModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatTableModule
   ],
   providers: [
     UserService,

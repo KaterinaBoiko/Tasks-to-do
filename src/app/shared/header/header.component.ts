@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   currDesktops: Desktop[];
-  userId: number;
+  isManager: boolean;
 
   // private desktop = new Subject<any>();
   // public desktopEmitter = this.desktop.asObservable();
@@ -28,8 +28,10 @@ export class HeaderComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.userId = this.loginService.getAuthorizedPerson().id;
-    this.currDesktops = this.deskService.desktops.filter(x => x.userId == this.userId);
+    this.isManager = 'desktopsId' in this.loginService.getAuthorizedPerson();
+    console.log('is manager? ', this.isManager);
+    let userId = this.loginService.getAuthorizedPerson().id;
+    this.currDesktops = this.deskService.getDesktops().filter(x => x.userId == userId);
   }
 
   changeDesktop(desktop: Desktop): void{

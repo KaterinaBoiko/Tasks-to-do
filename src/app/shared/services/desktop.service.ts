@@ -22,6 +22,11 @@ export class DesktopService {
 
   constructor() { }
 
+  addDesktop(desk: Desktop): void{
+    this.desktops.push(desk);
+    this.saveDesktops();
+  }
+
   getDesktops(): Desktop[] {
     if (localStorage.getItem('desktops') === '[]' || localStorage.getItem('desktops') === null)
       this.setDefaultDesktops();

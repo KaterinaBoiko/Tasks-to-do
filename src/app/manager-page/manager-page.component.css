@@ -1,0 +1,71 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.desktop {
+  width: 90%;
+  /* height: fit-content; */
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 7px;
+  font-family: 'Monoglyceride', Arial, sans-serif;
+  font-size: 23px;
+  margin: 20px 0 0 0;
+  padding-bottom: 15px;
+}
+
+.deskName {
+  font-family: 'Monoglyceride', Arial, sans-serif;
+  font-weight: bold;
+  font-size: 23px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  display: block;
+  margin: 1px 0 5px 10px;
+}
+
+.deskName:focus {
+  background-color: white;
+  box-sizing: border-box;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.deskHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+i {
+  margin: 10px;
+  padding: 5px 5px 2px;
+  cursor: pointer;
+}
+
+
+i:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+}
+
+.task {
+  width: 95%;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  font-size: 15px;
+  text-align: left;
+  padding: 4px 10px;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  position: relative;
+  word-wrap: break-word;
+  margin: 3px auto;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  cursor: pointer;
+}
+
+.taskName {
+  width: 50%;
+}

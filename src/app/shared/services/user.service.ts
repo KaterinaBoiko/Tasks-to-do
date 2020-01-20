@@ -6,7 +6,7 @@ import { User } from '../models/user.model';
 })
 export class UserService {
 
-  users: User[] = this.getUsers();
+  private users: User[] = this.getUsers();
 
   constructor() { }
 
