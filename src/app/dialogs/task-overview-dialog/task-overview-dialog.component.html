@@ -1,4 +1,4 @@
-<input class="name" [(ngModel)]="task.name">
+<input class="name" [(ngModel)]="task.name" name="taskName">
 
 <i class="fa fa-align-justify"></i>
 <p class="title">Description</p>
@@ -9,7 +9,7 @@
 <p class="title">Checklist</p>
 <div *ngFor="let item of task.checklist; index as i" class="check">
     <i class="fas fa-minus" (click)="deleteItem(i)"></i>
-    <mat-checkbox [(ngModel)]="item[0]" (change)="calcReadiness()" >
+    <mat-checkbox [(ngModel)]="item[0]" (change)="calcReadiness()">
         <input class="checktext" [(ngModel)]="item[1]">
     </mat-checkbox>
 </div>

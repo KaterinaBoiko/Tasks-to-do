@@ -9,6 +9,7 @@
             <div class="taskName">{{ task.name }}</div>
             <div class="taskStatus">{{ Status[task.status] }}</div>
             <div class="taskReadiness">{{ roundNumber(task.readiness) || 0}}%</div>
+            <i class="fas fa-minus" (click)="deleteTask(desk.id, task.id)"></i>
         </div>
     </div>
 </div>

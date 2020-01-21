@@ -34,33 +34,19 @@ export class DesktopPageComponent implements OnInit {
     this.currTasks = this.currDesktop.tasks;
 
     this.deskService.currDesktopEmitter.subscribe(desktop => {
-      localStorage.setItem('currentDesktopId', desktop.id.toString());
       this.currDesktop = this.deskService.desktops.find(x => x.id == desktop.id);
       this.currTasks = this.currDesktop.tasks;
     });
-
-    // this.deskService.allDesktopsEmitter.subscribe(() => {
-    //   let currDeskId = JSON.parse(localStorage.getItem('currentDesktopId'));
-    //   this.currDesktop = this.deskService.desktops.find(x => x.id == currDeskId);
-    //   this.currTasks = this.currDesktop.tasks;
-    //   });
-
   }
 
   openTaskOverview(id: number): void {
     const dialogRef = this.dialog.open(TaskOverviewDialogComponent, {
       width: '400px',
       data: { task: this.currDesktop.tasks.find(x => x.id == id) },
-      //data: { task: this.deskService.desktops.find(x => x.id == this.currDesktop.id).tasks.find(x => x.id == id) },
       autoFocus: false
     });
 
     dialogRef.afterClosed().subscribe(() => {
-      // console.log(result);
-      // console.log(this.currDesktop);
-      // console.log(this.deskService.desktops[0]);
-      // this.deskService.desktops.find(x => x.id == this.currDesktop.id)[0] = this.currDesktop;//????
-      // console.log(this.deskService.desktops[0]);
       this.deskService.saveDesktops();
     });
   }
@@ -78,11 +64,8 @@ export class DesktopPageComponent implements OnInit {
   }
 
   deleteTask(id: number): void {
-    console.log(id);
     let index = this.currTasks.findIndex(x => x.id == id);
-    console.log(index);
     this.currTasks.splice(index, 1);
-    console.log(this.currTasks);
     this.deskService.saveDesktops();
   }
 
@@ -102,6 +85,7 @@ export class DesktopPageComponent implements OnInit {
         event.currentIndex)
       currTaskId = JSON.parse(JSON.stringify(event.container.data[event.currentIndex].id));
       let newStatus = JSON.parse(JSON.stringify(Number(event.container.id.substring(event.container.id.length - 1)) % 3));
+      //console.log(newStatus);
       this.currTasks.find(x => x.id == currTaskId).status = newStatus;
       prevIndex = this.currTasks.findIndex(x => x.id === currTaskId);
       newIndex = event.currentIndex;

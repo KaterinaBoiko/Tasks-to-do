@@ -21,7 +21,7 @@
                     <li *ngFor="let desk of currDesktops">
                         <a href="javascript:;" (click)="changeDesktop(desk.id)"> {{ desk.name }} </a>
                     </li>
-                    <li><a href="javascript:;"> New </a></li>
+                    <li><a href="javascript:;" (click)="addNewDesktop()"> New </a></li>
                 </ul>
             </li>
             <li><a href="javascript:;">Settings</a>

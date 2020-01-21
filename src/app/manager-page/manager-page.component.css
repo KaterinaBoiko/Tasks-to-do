@@ -44,7 +44,7 @@ i {
 }
 
 
-i:hover {
+i:hover  :not(.fa-minus){
   background: rgba(255, 255, 255, 0.3);
   border-radius: 5px;
 }
@@ -61,11 +61,36 @@ i:hover {
   word-wrap: break-word;
   margin: 3px auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   flex-flow: row wrap;
   cursor: pointer;
 }
 
 .taskName {
-  width: 50%;
+  width: 55%;
+  /* background-color: aquamarine; */
+}
+
+.taskStatus{
+  width: 20%;
+  /* background-color: rgb(28, 65, 52); */
+}
+
+.taskReadiness{
+  width: 20%;
+  /* background-color: rgb(20, 175, 123); */
+  text-align: right;
+}
+
+.fa-minus {
+  color: red;
+  display: none;
+  position: absolute;
+  margin: 0;
+  cursor: pointer;
+  right: 13px;
+}
+
+.task:hover .fa-minus {
+  display: inline-block;
 }

@@ -29,6 +29,12 @@ export class HeaderComponent implements OnInit {
     this.deskService.setCurrentDesktop(desktopId);
   }
 
+  addNewDesktop(): void{
+    let newId = this.deskService.getNextDesktopId();
+    this.deskService.addDesktop(new Desktop(newId, "New desktop", this.loginService.getAuthorizedPerson().id));
+    this.changeDesktop(newId);
+  }
+
   logOut(): void {
     localStorage.setItem('authorizedPerson', null);
     this.router.navigateByUrl('/');

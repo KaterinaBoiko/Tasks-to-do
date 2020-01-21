@@ -29,7 +29,6 @@ export class ManagerPageComponent implements OnInit {
     this.currDesktops = this.deskService.desktops.filter(x =>
       this.currManager.desktopsId.includes(x.id)
     );
-    console.log(this.currDesktops);
   }
 
   addTask(deskId: number): void {
@@ -49,6 +48,13 @@ export class ManagerPageComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => {
       this.deskService.saveDesktops();
     });
+  }
+
+  deleteTask(deskId: number, taskId: number): void {
+    let currTasks = this.currDesktops.find(x => x.id == deskId).tasks;
+    let index = currTasks.findIndex(x => x.id == taskId);
+    currTasks.splice(index, 1);
+    this.deskService.saveDesktops();
   }
 
   roundNumber(num: number): number {
