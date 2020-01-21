@@ -28,32 +28,39 @@ export class DesktopPageComponent implements OnInit {
   ngOnInit() {
     this.currUser = this.loginService.getAuthorizedPerson();
     console.log(this.currUser);
+
     let currDeskId = JSON.parse(localStorage.getItem('currentDesktopId'));
     this.currDesktop = this.deskService.desktops.find(x => x.id == currDeskId);
-    //this.currDesktop = this.deskService.getDesktopsByUserId(this.currUser.id)[0];
-
     this.currTasks = this.currDesktop.tasks;
 
-    this.deskService.desktopEmitter.subscribe(desktop => {
-      this.currDesktop = desktop;
-      this.currTasks = this.currDesktop.tasks;
+    this.deskService.currDesktopEmitter.subscribe(desktop => {
       localStorage.setItem('currentDesktopId', desktop.id.toString());
+      this.currDesktop = this.deskService.desktops.find(x => x.id == desktop.id);
+      this.currTasks = this.currDesktop.tasks;
     });
+
+    // this.deskService.allDesktopsEmitter.subscribe(() => {
+    //   let currDeskId = JSON.parse(localStorage.getItem('currentDesktopId'));
+    //   this.currDesktop = this.deskService.desktops.find(x => x.id == currDeskId);
+    //   this.currTasks = this.currDesktop.tasks;
+    //   });
+
   }
 
   openTaskOverview(id: number): void {
     const dialogRef = this.dialog.open(TaskOverviewDialogComponent, {
       width: '400px',
       data: { task: this.currDesktop.tasks.find(x => x.id == id) },
+      //data: { task: this.deskService.desktops.find(x => x.id == this.currDesktop.id).tasks.find(x => x.id == id) },
       autoFocus: false
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      console.log(this.currDesktop);
-      console.log(this.deskService.desktops[0]);
-      this.deskService.desktops[0] = this.currDesktop;//????
-      console.log(this.deskService.desktops[0]);
+    dialogRef.afterClosed().subscribe(() => {
+      // console.log(result);
+      // console.log(this.currDesktop);
+      // console.log(this.deskService.desktops[0]);
+      // this.deskService.desktops.find(x => x.id == this.currDesktop.id)[0] = this.currDesktop;//????
+      // console.log(this.deskService.desktops[0]);
       this.deskService.saveDesktops();
     });
   }
@@ -68,8 +75,6 @@ export class DesktopPageComponent implements OnInit {
     newTask.status = statusNumber;
     this.currTasks.push(newTask);
     this.deskService.saveDesktops();
-    console.log(this.currTasks);
-    console.log(this.deskService.desktops[0].tasks);
   }
 
   deleteTask(id: number): void {

@@ -19,7 +19,7 @@
             <li *ngIf="!isManager"><a href="/desktop">Desktops</a>
                 <ul class="sub-menu">
                     <li *ngFor="let desk of currDesktops">
-                        <a href="javascript:;" (click)="changeDesktop(desk)"> {{ desk.name }} </a>
+                        <a href="javascript:;" (click)="changeDesktop(desk.id)"> {{ desk.name }} </a>
                     </li>
                     <li><a href="javascript:;"> New </a></li>
                 </ul>

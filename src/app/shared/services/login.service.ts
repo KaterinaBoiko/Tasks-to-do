@@ -40,6 +40,7 @@ export class LoginService {
       let currManager = this.managerService.findManager(username, password);
       if (!currManager) {
         localStorage.setItem('authorizedPerson', null);
+        this.router.navigateByUrl(`/`);
         return false;
       }
       else {

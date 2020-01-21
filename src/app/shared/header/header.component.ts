@@ -15,27 +15,18 @@ export class HeaderComponent implements OnInit {
   currDesktops: Desktop[];
   isManager: boolean;
 
-  // private desktop = new Subject<any>();
-  // public desktopEmitter = this.desktop.asObservable();
-
-  // desktopEmitChange(): Observable<any> {
-  //   console.log(this.desktop);
-  //   return this.desktop.asObservable();
-  // } 
-
   constructor(private loginService: LoginService,
     private deskService: DesktopService,
     private router: Router) { }
 
   ngOnInit() {
     this.isManager = 'desktopsId' in this.loginService.getAuthorizedPerson();
-    console.log('is manager? ', this.isManager);
     let userId = this.loginService.getAuthorizedPerson().id;
-    this.currDesktops = this.deskService.getDesktops().filter(x => x.userId == userId);
+    this.currDesktops = this.deskService.desktops.filter(x => x.userId == userId);
   }
 
-  changeDesktop(desktop: Desktop): void{
-    this.deskService.setCurrentDesktop(desktop);
+  changeDesktop(desktopId: number): void{
+    this.deskService.setCurrentDesktop(desktopId);
   }
 
   logOut(): void {

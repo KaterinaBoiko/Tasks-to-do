@@ -35,20 +35,18 @@ export class ManagerPageComponent implements OnInit {
   addTask(deskId: number): void {
     let taskId = this.deskService.getNextTaskIdByDesktopId();
     let newTask = new Task(taskId, 'new task');
-    this.deskService.desktops.find(x => x.id == deskId).tasks.push(newTask);
-    this.deskService.saveDesktops();
     this.currDesktops.find(x => x.id === deskId).tasks.push(newTask);
+    this.deskService.saveDesktops();
   }
 
   openTaskOverview(desk: Desktop, id: number): void {
     const dialogRef = this.dialog.open(TaskOverviewDialogComponent, {
       width: '400px',
-      data: { task: this.deskService.desktops.find(x => x.id == desk.id).tasks.find(x => x.id == id) },
+      data: { task: this.currDesktops.find(x => x.id == desk.id).tasks.find(x => x.id == id) },
       autoFocus: false
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+    dialogRef.afterClosed().subscribe(() => {
       this.deskService.saveDesktops();
     });
   }

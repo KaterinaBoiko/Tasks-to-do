@@ -11,12 +11,15 @@ export class DesktopService {
   desktops: Desktop[] = this.getDesktops();
   currentDesktop: Desktop;
 
-  private desktop: Subject<Desktop> = new Subject();
-  public desktopEmitter = this.desktop.asObservable();
+  private currDesktopSubject: Subject<Desktop> = new Subject();
+  public currDesktopEmitter = this.currDesktopSubject.asObservable();
 
-  setCurrentDesktop(desk: Desktop): void {
-    this.currentDesktop = desk;
-    this.desktop.next(this.currentDesktop);
+  //private allDesktopsSubject: Subject<Desktop[]> = new Subject();
+  //public allDesktopsEmitter = this.allDesktopsSubject.asObservable();
+
+  setCurrentDesktop(deskId: number): void {
+    this.currentDesktop = this.desktops.find(x => x.id == deskId);
+    this.currDesktopSubject.next(this.currentDesktop);
     console.log(this.currentDesktop);
   }
 
@@ -35,6 +38,7 @@ export class DesktopService {
   }
 
   saveDesktops(): void {
+    //this.allDesktopsSubject.next();
     localStorage.setItem('desktops', JSON.stringify(this.desktops));
   }
 
