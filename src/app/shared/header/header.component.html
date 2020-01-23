@@ -11,22 +11,25 @@
     </div>
     <nav>
         <ul class="main-menu">
-            <li *ngIf="isManager"><a href="javascript:;">Add</a>
+            <li *ngIf="isManager"><a href="javascript:;">Actions</a>
                 <ul class="sub-menu">
-                    <li><a href="#">Subordinate</a></li>
+                    <li><a href="javascript:;" routerLink="/manager">Desktops</a></li>
+                    <li><a href="javascript:;" (click)="addSubordinate()">Add subordinate</a></li>
                 </ul>
             </li>
-            <li *ngIf="!isManager"><a href="/desktop">Desktops</a>
+            <li *ngIf="!isManager"><a routerLink="/desktop">Desktops</a>
                 <ul class="sub-menu">
                     <li *ngFor="let desk of currDesktops">
                         <a href="javascript:;" (click)="changeDesktop(desk.id)"> {{ desk.name }} </a>
                     </li>
-                    <li><a href="javascript:;" (click)="addNewDesktop()"> New </a></li>
+                    <li><a href="javascript:;" (click)="addNewDesktop()">
+                            Create new <i class="fa fa-plus"></i>
+                        </a></li>
                 </ul>
             </li>
             <li><a href="javascript:;">Settings</a>
                 <ul class="sub-menu">
-                    <li><a href="#">Profile</a></li>
+                    <li><a routerLink="/profile">Profile</a></li>
                     <li><a href="#">Backgrounds</a></li>
                     <li><a href="javascript:;" (click)="logOut()">Log out</a></li>
                 </ul>

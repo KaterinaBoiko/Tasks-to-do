@@ -1,0 +1,7 @@
+<p class="title">Users:</p>
+<div *ngFor="let user of users; index as i" class="check">
+    <mat-checkbox [(ngModel)]="userIdAndBoolean[i][1]">
+        <p> {{ user.username }} </p>
+    </mat-checkbox>
+</div>
+<button type="submit" [mat-dialog-close]="data">Ok</button>

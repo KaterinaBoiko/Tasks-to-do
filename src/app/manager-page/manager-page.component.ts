@@ -6,6 +6,8 @@ import { DesktopService } from '../shared/services/desktop.service';
 import { Status, Task } from '../shared/models/task.model';
 import { MatDialog } from '@angular/material';
 import { TaskOverviewDialogComponent } from '../dialogs/task-overview-dialog/task-overview-dialog.component';
+import { UserService } from '../shared/services/user.service';
+import { ManagerService } from '../shared/services/manager.service';
 
 @Component({
   selector: 'app-manager-page',
@@ -21,7 +23,9 @@ export class ManagerPageComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
     private loginService: LoginService,
-    private deskService: DesktopService) { }
+    private deskService: DesktopService,
+    private userService: UserService,
+    private managerService: ManagerService) { }
 
   ngOnInit() {
     this.currManager = this.loginService.getAuthorizedPerson();
@@ -29,6 +33,12 @@ export class ManagerPageComponent implements OnInit {
     this.currDesktops = this.deskService.desktops.filter(x =>
       this.currManager.desktopsId.includes(x.id)
     );
+
+    this.managerService.currDesktopIdsEmitter.subscribe(() => {
+      this.currDesktops = this.deskService.desktops.filter(x =>
+        this.currManager.desktopsId.includes(x.id)
+      );    
+    });
   }
 
   addTask(deskId: number): void {
@@ -59,5 +69,14 @@ export class ManagerPageComponent implements OnInit {
 
   roundNumber(num: number): number {
     return Math.round(num);
+  }
+
+  getDeskOwnerByDesk(desk: Desktop): string{
+    return this.userService.users.find(x => x.id == desk.userId).username;
+  }
+
+  deleteDesk(deskId: number): void{
+    let index = this.currDesktops.findIndex(x => x.id == deskId);
+    this.currDesktops.splice(index, 1);
   }
 }

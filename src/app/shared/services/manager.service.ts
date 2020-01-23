@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Manager } from '../models/manager.model';
 import { DesktopService } from './desktop.service';
 import { Desktop } from '../models/desktop.model';
+import { LoginService } from './login.service';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +11,9 @@ import { Desktop } from '../models/desktop.model';
 export class ManagerService {
 
   managers: Manager[] = this.getManagers();
+
+  private currDesktopIdsSubject: Subject<number[]> = new Subject();
+  public currDesktopIdsEmitter = this.currDesktopIdsSubject.asObservable();
 
   constructor(private deskService: DesktopService) { }
 
@@ -25,7 +30,8 @@ export class ManagerService {
   }
 
   getNextId(): number {
-    return this.managers.length;
+    let maxUsedId = Math.max(...this.managers.map(x => x.id));
+    return ++maxUsedId;
   }
   
   setDefaultManagers(): void {
@@ -42,5 +48,18 @@ export class ManagerService {
   addSubordinatesDesktop(manager:Manager, desktopId: number, userId: number): void {
     manager.desktopsId.push(desktopId);
     this.deskService.addDesktop(new Desktop(desktopId, 'Default', userId));
+    this.currDesktopIdsSubject.next();
+    this.saveManagers();
+  }
+
+  addSubordinates(userIds: number[], currManager: Manager): void{
+    userIds.forEach(x => {
+      this.addSubordinatesDesktop(currManager, this.deskService.getNextDesktopId(), x);
+    });
+    localStorage.setItem('authorizedPerson', JSON.stringify(currManager));
+
+  }
+  saveManagers(): void {
+    localStorage.setItem('managers', JSON.stringify(this.managers));
   }
 }

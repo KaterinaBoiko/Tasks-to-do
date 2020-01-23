@@ -1,0 +1,42 @@
+<app-header></app-header>
+
+<div class="main">
+    <form #userData="ngForm" (ngSubmit)="onSubmit(userData.value)">
+        <table>
+            <tr>
+                <td>
+                    <span>Username:</span>
+                </td>
+                <td>
+                    <input [(ngModel)]="authorizedPerson.username" name="username">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Name:</span>
+                </td>
+                <td>
+                    <input [(ngModel)]="authorizedPerson.name" placeholder="Your name" name="name">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Surname:</span>
+                </td>
+                <td>
+                    <input [(ngModel)]="authorizedPerson.surname" placeholder="Your surname" name="surname">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Email:</span>
+                </td>
+                <td>
+                    <input [(ngModel)]="authorizedPerson.email" placeholder="Your email" name="email">
+                </td>
+            </tr>
+        </table>
+        <button type="submit">Save changes</button>
+    </form>
+    <!-- <button class="delete" (click)="deleteAccount()">Delete account</button> -->
+</div>

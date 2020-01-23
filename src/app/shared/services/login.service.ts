@@ -12,22 +12,16 @@ import { DesktopService } from './desktop.service';
 })
 export class LoginService {
 
-  private authorizedPerson: User | Manager | null;
+  private authorizedPerson: User | Manager;//| null
 
   private authorizedPersonSubject = new Subject<User | Manager | null>();
   public userEmitter = this.authorizedPersonSubject.asObservable();
-
-  // userEmitChange(): Observable<any> {
-  //   console.log(this.authorizedPersonSubject);
-  //   return this.authorizedPersonSubject.asObservable();
-  // }
 
   constructor(private userService: UserService,
     private managerService: ManagerService,
     private deskService: DesktopService,
     private router: Router) {
     this.authorizedPerson = JSON.parse(localStorage.getItem('authorizedPerson'));
-    //this.authorizedPerson = this.userService.getUsers()[0];//!!!
   }
 
   getAuthorizedPerson(): any {

@@ -22,6 +22,10 @@ h1 {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
+.fa-trash-alt {
+  margin: 0;
+}
+
 .main {
   display: flex;
   justify-content: space-evenly;
@@ -60,7 +64,7 @@ i {
   cursor: pointer;
 }
 
-i:hover :not(.fa-minus){
+i:hover :not(.fa-minus) {
   background: rgba(255, 255, 255, 0.3);
   border-radius: 5px;
 }
@@ -93,4 +97,26 @@ i:hover :not(.fa-minus){
 
 .cdk-drag-animating {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+button {
+  background-color: lavender;
+  padding: 3px 10px;
+  border-radius: 5px;
+  border: 2px solid lavender;
+  font-family: inherit;
+  font-size: 15px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+button:focus {
+  outline: 0;
+}
+
+button:hover {
+  background-color: rgba(230, 230, 250, 0.26);
 }

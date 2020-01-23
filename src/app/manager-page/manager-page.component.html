@@ -2,8 +2,14 @@
 <div class="main">
     <div class="desktop" *ngFor="let desk of currDesktops">
         <div class="deskHeader">
-            <input class="deskName" [(ngModel)]="desk.name">
-            <i class="fa fa-plus" (click)="addTask(desk.id)"></i>
+            <div>
+                <input class="deskName" [(ngModel)]="desk.name">
+                <span class="deskOwner">{{ getDeskOwnerByDesk(desk) }}</span>
+            </div>
+            <div>
+                <i class="fa fa-plus" (click)="addTask(desk.id)"></i>
+                <i class="fas fa-trash-alt" (click)="deleteDesk(desk.id)"></i>  
+            </div>
         </div>
         <div class="task" *ngFor="let task of desk.tasks" (click)="openTaskOverview(desk, task.id)">
             <div class="taskName">{{ task.name }}</div>

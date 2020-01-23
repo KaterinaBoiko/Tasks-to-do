@@ -39,7 +39,8 @@ export class DesktopService {
   }
 
   getNextDesktopId(): number {
-    return this.desktops.length;
+    let maxUsedId = Math.max(...this.desktops.map(x => x.id));
+    return ++maxUsedId;
   }
 
   getNextTaskIdByDesktopId(): number {

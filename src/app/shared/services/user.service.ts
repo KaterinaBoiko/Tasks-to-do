@@ -6,7 +6,7 @@ import { User } from '../models/user.model';
 })
 export class UserService {
 
-  private users: User[] = this.getUsers();
+  users: User[] = this.getUsers();
 
   constructor() { }
 
@@ -47,7 +47,8 @@ export class UserService {
   }
 
   getNextId(): number {
-    return this.users.length;
+    let maxUsedId = Math.max(...this.users.map(x => x.id));
+    return ++maxUsedId;
   }
 
   setDefaultUsers(): void {
@@ -58,4 +59,9 @@ export class UserService {
     ];
     localStorage.setItem('users', JSON.stringify(defaultUsers));
   }
+
+  saveUsers(): void {
+    localStorage.setItem('users', JSON.stringify(this.users));
+  }
+
 }

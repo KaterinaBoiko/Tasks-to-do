@@ -8,6 +8,7 @@ import { Task } from '../shared/models/task.model';
 import { TaskOverviewDialogComponent } from '../dialogs/task-overview-dialog/task-overview-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDragEnd } from '@angular/cdk/drag-drop';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-desktop-page',
@@ -23,7 +24,8 @@ export class DesktopPageComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
     private deskService: DesktopService,
-    private loginService: LoginService) { }
+    private loginService: LoginService,
+    private router: Router) { }
 
   ngOnInit() {
     this.currUser = this.loginService.getAuthorizedPerson();
@@ -69,7 +71,17 @@ export class DesktopPageComponent implements OnInit {
     this.deskService.saveDesktops();
   }
 
+  deleteDesktop(){
+    let index = this.deskService.desktops.findIndex(x => x.id == this.currDesktop.id);
+    this.deskService.desktops.splice(index, 1);
+    this.deskService.setCurrentDesktop(
+      this.deskService.getDesktopsByUserId(
+        this.currUser.id)[0].id);
+    this.deskService.saveDesktops();
+  }
+
   drop(event: CdkDragDrop<Task[]>) {
+    this.currTasks.sort((a, b) => a.status - b.status);
     let currTaskId: number, prevIndex: number, newIndex: number;
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -85,7 +97,7 @@ export class DesktopPageComponent implements OnInit {
         event.currentIndex)
       currTaskId = JSON.parse(JSON.stringify(event.container.data[event.currentIndex].id));
       let newStatus = JSON.parse(JSON.stringify(Number(event.container.id.substring(event.container.id.length - 1)) % 3));
-      //console.log(newStatus);
+      console.log(newStatus);
       this.currTasks.find(x => x.id == currTaskId).status = newStatus;
       prevIndex = this.currTasks.findIndex(x => x.id === currTaskId);
       newIndex = event.currentIndex;

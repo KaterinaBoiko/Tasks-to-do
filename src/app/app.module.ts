@@ -24,6 +24,8 @@ import { SignInDialogComponent } from './dialogs/sign-in-dialog/sign-in-dialog.c
 import { TaskOverviewDialogComponent } from './dialogs/task-overview-dialog/task-overview-dialog.component';
 import { ManagerPageComponent } from './manager-page/manager-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { AddSubordinateDialogComponent } from './dialogs/add-subordinate-dialog/add-subordinate-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     SignInDialogComponent,
     TaskOverviewDialogComponent,
     ManagerPageComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ProfilePageComponent,
+    AddSubordinateDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +68,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   bootstrap: [AppComponent],
   entryComponents: [
     SignInDialogComponent,
-    TaskOverviewDialogComponent
+    TaskOverviewDialogComponent,
+    AddSubordinateDialogComponent
   ]
 })
 export class AppModule { }
