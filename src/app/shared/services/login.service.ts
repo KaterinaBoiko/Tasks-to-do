@@ -40,18 +40,18 @@ export class LoginService {
       else {
         this.authorizedPerson = currManager;
         this.authorizedPersonSubject.next(this.authorizedPerson);
-        this.router.navigateByUrl('/manager');
         localStorage.setItem('authorizedPerson', JSON.stringify(this.authorizedPerson));
+        this.router.navigateByUrl('/manager');
         return true;
       }
     }
     else {
       this.authorizedPerson = currUser;
       this.authorizedPersonSubject.next(this.authorizedPerson);
-      this.router.navigateByUrl(`/desktop`);
       localStorage.setItem('authorizedPerson', JSON.stringify(this.authorizedPerson));
       let currDesktopId = this.deskService.getDesktopsByUserId(this.authorizedPerson.id)[0].id;
       localStorage.setItem('currentDesktopId', currDesktopId.toString());
+      this.router.navigateByUrl(`/desktop`);
       return true;
     }
   }

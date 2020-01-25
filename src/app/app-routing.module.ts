@@ -7,14 +7,15 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
+import { AuthGuardService } from './shared/services/auth-guard.service';
 
 
 const routes: Routes = [
   { path: '', component: WelcomePageComponent},
   { path: 'main', component: MainPageComponent},
-  { path: 'desktop', component: DesktopPageComponent},
-  { path: 'manager', component: ManagerPageComponent},
-  { path: 'profile', component: ProfilePageComponent },
+  { path: 'desktop', component: DesktopPageComponent, canActivate: [AuthGuardService] },
+  { path: 'manager', component: ManagerPageComponent, canActivate: [AuthGuardService] },
+  { path: 'profile', component: ProfilePageComponent},
   { path: 'contacts', component: ContactPageComponent},
   { path: '**', component: PageNotFoundComponent}
 ];

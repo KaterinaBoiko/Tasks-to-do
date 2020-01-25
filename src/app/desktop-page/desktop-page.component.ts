@@ -20,7 +20,7 @@ export class DesktopPageComponent implements OnInit {
   currUser: User;
   currDesktop: Desktop;
   currTasks: Task[];
-  currManagerUsername: string = null;
+  currManagerName: string = null;
 
   constructor(public dialog: MatDialog,
     private deskService: DesktopService,
@@ -83,13 +83,13 @@ export class DesktopPageComponent implements OnInit {
   }
 
   setManagerName(): void {
-    this.currManagerUsername = null;
+    this.currManagerName = null;
     this.managerService.managers.forEach(x => {
       if (x.desktopsId.includes(this.currDesktop.id)) {
         if (x.name)
-          this.currManagerUsername = x.name;
+          this.currManagerName = x.name;
         else
-          this.currManagerUsername = x.username;
+          this.currManagerName = x.username;
       }
     });
   }

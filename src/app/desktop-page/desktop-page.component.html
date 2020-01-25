@@ -1,6 +1,6 @@
 <app-header></app-header>
 <input class="deskName" [(ngModel)]="currDesktop.name" (blur)="deskService.saveDesktops()">
-<p class="manager" *ngIf="currManagerUsername">Manager: {{ currManagerUsername }}</p>
+<p class="manager" *ngIf="currManagerName">Manager: {{ currManagerName }}</p>
 
 <button (click)="deleteDesktop()"><i class="fas fa-trash-alt"></i></button>
 <div class="main">
