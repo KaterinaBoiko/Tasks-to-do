@@ -27,7 +27,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { AddSubordinateDialogComponent } from './dialogs/add-subordinate-dialog/add-subordinate-dialog.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
-import { AuthGuardService } from './shared/services/auth-guard.service';
+import { GuardService } from './shared/services/guard.service';
 
 @NgModule({
   declarations: [
@@ -66,7 +66,7 @@ import { AuthGuardService } from './shared/services/auth-guard.service';
     UserService,
     DesktopService,
     ManagerService,
-    AuthGuardService,
+    GuardService,
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
   ],
   bootstrap: [AppComponent],
