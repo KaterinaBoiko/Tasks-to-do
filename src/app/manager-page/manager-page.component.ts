@@ -20,6 +20,10 @@ export class ManagerPageComponent implements OnInit {
   currDesktops: Desktop[] = [];
   Status: typeof Status = Status;
 
+  userIdBoolean: [number, boolean][] = [];
+  done100: boolean = false;
+  done0: boolean = false;
+
 
   constructor(public dialog: MatDialog,
     private loginService: LoginService,
@@ -34,10 +38,20 @@ export class ManagerPageComponent implements OnInit {
       this.currManager.desktopsId.includes(x.id)
     );
 
+    this.currDesktops.forEach(x => {
+      let currUser = this.userService.users.find(u => u.id == x.userId);
+      this.userIdBoolean.push([currUser.id, false]);
+    });
+
     this.managerService.currDesktopIdsEmitter.subscribe(() => {
       this.currDesktops = this.deskService.desktops.filter(x =>
         this.currManager.desktopsId.includes(x.id)
       );
+      this.userIdBoolean = [];
+      this.currDesktops.forEach(x => {
+        let currUser = this.userService.users.find(u => u.id == x.userId);
+        this.userIdBoolean.push([currUser.id, false]);
+      });
     });
   }
 
@@ -110,5 +124,10 @@ export class ManagerPageComponent implements OnInit {
       this.currDesktops.sort((a, b) => a.tasks.length - b.tasks.length);
     if (condition == 'toSmallerTaskAmount')
       this.currDesktops.sort((a, b) => b.tasks.length - a.tasks.length);
+  }
+
+  filterDesktops() {
+    console.log(this.userIdBoolean);
+    console.log(this.done100);
   }
 }

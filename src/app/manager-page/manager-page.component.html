@@ -4,18 +4,41 @@
         <i class="fas fa-sort"></i>
         <ul class="sub-sort">
             <li><a href="javascript:;" (click)="orderBy('adding')"> By adding <i class="far fa-clock"></i></a></li>
-            <li><a href="javascript:;" (click)="orderBy('downDeskname')"> By desktop name <i class="fas fa-sort-alpha-down"></i></a></li>
-            <li><a href="javascript:;" (click)="orderBy('upDeskname')"> By desktop name <i class="fas fa-sort-alpha-down-alt"></i></a></li>
-            <li><a href="javascript:;" (click)="orderBy('downDeskOwnerName')"> By desktop owner name <i class="fas fa-sort-alpha-down"></i></a></li>
-            <li><a href="javascript:;" (click)="orderBy('upDeskOwnerName')"> By desktop owner name <i class="fas fa-sort-alpha-down-alt"></i></a></li>
-            <li><a href="javascript:;" (click)="orderBy('toBiggerTaskAmount')"> By task amount <i class="fas fa-sort-amount-down-alt"></i></a></li>
-            <li><a href="javascript:;" (click)="orderBy('toSmallerTaskAmount')"> By task amount <i class="fas fa-sort-amount-down"></i></a></li>
+            <li><a href="javascript:;" (click)="orderBy('downDeskname')"> By desktop name <i
+                        class="fas fa-sort-alpha-down"></i></a></li>
+            <li><a href="javascript:;" (click)="orderBy('upDeskname')"> By desktop name <i
+                        class="fas fa-sort-alpha-down-alt"></i></a></li>
+            <li><a href="javascript:;" (click)="orderBy('downDeskOwnerName')"> By desktop owner name <i
+                        class="fas fa-sort-alpha-down"></i></a></li>
+            <li><a href="javascript:;" (click)="orderBy('upDeskOwnerName')"> By desktop owner name <i
+                        class="fas fa-sort-alpha-down-alt"></i></a></li>
+            <li><a href="javascript:;" (click)="orderBy('toBiggerTaskAmount')"> By task amount <i
+                        class="fas fa-sort-amount-down-alt"></i></a></li>
+            <li><a href="javascript:;" (click)="orderBy('toSmallerTaskAmount')"> By task amount <i
+                        class="fas fa-sort-amount-down"></i></a></li>
         </ul>
         <i class="fas fa-filter"></i>
-        <ul class="sub-filter">
+        <!-- <ul class="sub-filter">
             <li><a href="javascript:;"> By desktop name <i class="fas fa-sort-alpha-down"></i></a></li>
             <li><a href="javascript:;"> By desktop name <i class="fas fa-sort-alpha-down-alt"></i></a></li>
             <li><a href="javascript:;"> By desktop owner name <i class="fas fa-sort-alpha-down"></i></a></li>
+        </ul> -->
+        <ul class="sub-filter">
+            <li *ngFor="let item of userIdBoolean; index as i" class="check">
+                <mat-checkbox [(ngModel)]="userIdBoolean[i][1]" (change)="filterDesktops()">
+                    <p> {{ item }} </p>
+                </mat-checkbox>
+            </li>
+            <li>
+                <mat-checkbox [(ngModel)]="done100" (change)="filterDesktops()">
+                    <p> Done 100% </p>
+                </mat-checkbox>
+            </li>
+            <li>
+                <mat-checkbox [(ngModel)]="done0" (change)="filterDesktops()">
+                    <p> Done 0% </p>
+                </mat-checkbox>
+            </li>
         </ul>
     </div>
     <div class="desktop" *ngFor="let desk of currDesktops">
