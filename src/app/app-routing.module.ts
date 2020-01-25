@@ -6,6 +6,7 @@ import { ManagerPageComponent } from './manager-page/manager-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { ContactPageComponent } from './contact-page/contact-page.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'desktop', component: DesktopPageComponent},
   { path: 'manager', component: ManagerPageComponent},
   { path: 'profile', component: ProfilePageComponent },
+  { path: 'contacts', component: ContactPageComponent},
   { path: '**', component: PageNotFoundComponent}
 ];
 

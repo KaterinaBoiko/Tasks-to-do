@@ -22,6 +22,13 @@ h1 {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
+.manager{
+  font-family: 'Monoglyceride', Arial, sans-serif;
+  font-size: 23px;
+  text-align: center;
+  margin-top: -15px;
+}
+
 .fa-trash-alt {
   margin: 0;
 }

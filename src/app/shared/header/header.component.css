@@ -47,7 +47,7 @@ ul {
   padding: 0;
 }
 
-.main-menu>a:hover {
+.main-menu>li>a:hover{
   color: white;
 }
 

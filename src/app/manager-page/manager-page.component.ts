@@ -28,7 +28,9 @@ export class ManagerPageComponent implements OnInit {
     private managerService: ManagerService) { }
 
   ngOnInit() {
-    this.currManager = this.loginService.getAuthorizedPerson();
+    this.currManager = this.managerService.managers.find(x => x.id == this.loginService.getAuthorizedPerson().id);
+    //this.currManager.desktopsId.splice(2,1);this.managerService.saveManagers();
+    //this.deskService.desktops.splice(5, 1); this.deskService.saveDesktops();
     console.log(this.currManager);
     this.currDesktops = this.deskService.desktops.filter(x =>
       this.currManager.desktopsId.includes(x.id)
@@ -76,7 +78,15 @@ export class ManagerPageComponent implements OnInit {
   }
 
   deleteDesk(deskId: number): void{
-    let index = this.currDesktops.findIndex(x => x.id == deskId);
-    this.currDesktops.splice(index, 1);
+    let index = this.deskService.desktops.findIndex(x => x.id == deskId);
+    this.deskService.desktops.splice(index, 1);
+    let deskIdIndex = this.currManager.desktopsId.findIndex(x => x == deskId);
+    this.currManager.desktopsId.splice(deskIdIndex, 1);
+    localStorage.setItem('authorizedPerson', JSON.stringify(this.currManager));
+    this.managerService.saveManagers();
+    this.currDesktops = this.deskService.desktops.filter(x =>
+      this.currManager.desktopsId.includes(x.id)
+    );
+    this.deskService.saveDesktops();
   }
 }

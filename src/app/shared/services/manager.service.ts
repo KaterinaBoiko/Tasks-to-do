@@ -37,7 +37,7 @@ export class ManagerService {
   setDefaultManagers(): void {
     let man1 = new Manager(1,'admin','1',null);
     man1.desktopsId.push(0);
-    this.addSubordinatesDesktop(man1, this.deskService.getNextDesktopId(), 0);
+    this.addSubordinatesDesktop(man1.id, this.deskService.getNextDesktopId(), 0);
     let defaultManagers = [
       new Manager(0, 'admin', '1111', null),
       man1
@@ -45,19 +45,18 @@ export class ManagerService {
     localStorage.setItem('managers', JSON.stringify(defaultManagers));
   }
 
-  addSubordinatesDesktop(manager:Manager, desktopId: number, userId: number): void {
-    manager.desktopsId.push(desktopId);
+  addSubordinatesDesktop(managerId: number, desktopId: number, userId: number): void {
+    this.managers.find(x => x.id == managerId).desktopsId.push(desktopId);
     this.deskService.addDesktop(new Desktop(desktopId, 'Default', userId));
     this.currDesktopIdsSubject.next();
     this.saveManagers();
   }
 
-  addSubordinates(userIds: number[], currManager: Manager): void{
+  addSubordinates(userIds: number[], currManagerId: number): void{
     userIds.forEach(x => {
-      this.addSubordinatesDesktop(currManager, this.deskService.getNextDesktopId(), x);
+      this.addSubordinatesDesktop(currManagerId, this.deskService.getNextDesktopId(), x);
     });
-    localStorage.setItem('authorizedPerson', JSON.stringify(currManager));
-
+    localStorage.setItem('authorizedPerson', JSON.stringify(this.managers.find(x => x.id == currManagerId)));
   }
   saveManagers(): void {
     localStorage.setItem('managers', JSON.stringify(this.managers));

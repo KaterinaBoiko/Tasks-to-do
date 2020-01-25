@@ -26,6 +26,7 @@ import { ManagerPageComponent } from './manager-page/manager-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { AddSubordinateDialogComponent } from './dialogs/add-subordinate-dialog/add-subordinate-dialog.component';
+import { ContactPageComponent } from './contact-page/contact-page.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AddSubordinateDialogComponent } from './dialogs/add-subordinate-dialog/
     ManagerPageComponent,
     PageNotFoundComponent,
     ProfilePageComponent,
-    AddSubordinateDialogComponent
+    AddSubordinateDialogComponent,
+    ContactPageComponent
   ],
   imports: [
     BrowserModule,

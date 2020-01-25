@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { UserService } from '../shared/services/user.service';
 import { User } from '../shared/models/user.model';
 import { DesktopService } from '../shared/services/desktop.service';
 import { Desktop } from '../shared/models/desktop.model';
@@ -8,7 +7,7 @@ import { Task } from '../shared/models/task.model';
 import { TaskOverviewDialogComponent } from '../dialogs/task-overview-dialog/task-overview-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDragEnd } from '@angular/cdk/drag-drop';
-import { Router } from '@angular/router';
+import { ManagerService } from '../shared/services/manager.service';
 
 @Component({
   selector: 'app-desktop-page',
@@ -21,11 +20,12 @@ export class DesktopPageComponent implements OnInit {
   currUser: User;
   currDesktop: Desktop;
   currTasks: Task[];
+  currManagerUsername: string = null;
 
   constructor(public dialog: MatDialog,
     private deskService: DesktopService,
     private loginService: LoginService,
-    private router: Router) { }
+    private managerService: ManagerService) { }
 
   ngOnInit() {
     this.currUser = this.loginService.getAuthorizedPerson();
@@ -34,10 +34,12 @@ export class DesktopPageComponent implements OnInit {
     let currDeskId = JSON.parse(localStorage.getItem('currentDesktopId'));
     this.currDesktop = this.deskService.desktops.find(x => x.id == currDeskId);
     this.currTasks = this.currDesktop.tasks;
+    this.setManagerName();
 
     this.deskService.currDesktopEmitter.subscribe(desktop => {
       this.currDesktop = this.deskService.desktops.find(x => x.id == desktop.id);
       this.currTasks = this.currDesktop.tasks;
+      this.setManagerName();
     });
   }
 
@@ -71,13 +73,25 @@ export class DesktopPageComponent implements OnInit {
     this.deskService.saveDesktops();
   }
 
-  deleteDesktop(){
+  deleteDesktop() {
     let index = this.deskService.desktops.findIndex(x => x.id == this.currDesktop.id);
     this.deskService.desktops.splice(index, 1);
     this.deskService.setCurrentDesktop(
       this.deskService.getDesktopsByUserId(
         this.currUser.id)[0].id);
     this.deskService.saveDesktops();
+  }
+
+  setManagerName(): void {
+    this.currManagerUsername = null;
+    this.managerService.managers.forEach(x => {
+      if (x.desktopsId.includes(this.currDesktop.id)) {
+        if (x.name)
+          this.currManagerUsername = x.name;
+        else
+          this.currManagerUsername = x.username;
+      }
+    });
   }
 
   drop(event: CdkDragDrop<Task[]>) {

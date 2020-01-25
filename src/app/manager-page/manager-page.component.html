@@ -3,7 +3,7 @@
     <div class="desktop" *ngFor="let desk of currDesktops">
         <div class="deskHeader">
             <div>
-                <input class="deskName" [(ngModel)]="desk.name">
+                <input class="deskName" [(ngModel)]="desk.name" (blur)="deskService.saveDesktops()">
                 <span class="deskOwner">{{ getDeskOwnerByDesk(desk) }}</span>
             </div>
             <div>

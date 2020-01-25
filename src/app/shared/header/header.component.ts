@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      this.managerService.addSubordinates(result, this.loginService.getAuthorizedPerson());
+      this.managerService.addSubordinates(result, this.loginService.getAuthorizedPerson().id);
     });
   }
 
