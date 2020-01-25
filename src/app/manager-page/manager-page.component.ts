@@ -29,8 +29,6 @@ export class ManagerPageComponent implements OnInit {
 
   ngOnInit() {
     this.currManager = this.managerService.managers.find(x => x.id == this.loginService.getAuthorizedPerson().id);
-    //this.currManager.desktopsId.splice(2,1);this.managerService.saveManagers();
-    //this.deskService.desktops.splice(5, 1); this.deskService.saveDesktops();
     console.log(this.currManager);
     this.currDesktops = this.deskService.desktops.filter(x =>
       this.currManager.desktopsId.includes(x.id)
@@ -39,7 +37,7 @@ export class ManagerPageComponent implements OnInit {
     this.managerService.currDesktopIdsEmitter.subscribe(() => {
       this.currDesktops = this.deskService.desktops.filter(x =>
         this.currManager.desktopsId.includes(x.id)
-      );    
+      );
     });
   }
 
@@ -73,11 +71,11 @@ export class ManagerPageComponent implements OnInit {
     return Math.round(num);
   }
 
-  getDeskOwnerByDesk(desk: Desktop): string{
+  getDeskOwnerByDesk(desk: Desktop): string {
     return this.userService.users.find(x => x.id == desk.userId).username;
   }
 
-  deleteDesk(deskId: number): void{
+  deleteDesk(deskId: number): void {
     let index = this.deskService.desktops.findIndex(x => x.id == deskId);
     this.deskService.desktops.splice(index, 1);
     let deskIdIndex = this.currManager.desktopsId.findIndex(x => x == deskId);
@@ -88,5 +86,29 @@ export class ManagerPageComponent implements OnInit {
       this.currManager.desktopsId.includes(x.id)
     );
     this.deskService.saveDesktops();
+  }
+
+  orderBy(condition: string): void {
+    if (condition == 'adding') {
+      this.currDesktops = this.deskService.desktops.filter(x =>
+        this.currManager.desktopsId.includes(x.id)
+      );
+    }
+    if (condition == 'downDeskname') {
+      this.currDesktops.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+    }
+    if (condition == 'upDeskname')
+      this.currDesktops.sort((a, b) => (a.name > b.name) ? -1 : ((b.name > a.name) ? 1 : 0));
+    if (condition == 'downDeskOwnerName') {
+      this.currDesktops.sort((a, b) => this.getDeskOwnerByDesk(a) > this.getDeskOwnerByDesk(b) ? 1 :
+        this.getDeskOwnerByDesk(a) < this.getDeskOwnerByDesk(b) ? -1 : 0);
+    }
+    if (condition == 'upDeskOwnerName')
+      this.currDesktops.sort((a, b) => this.getDeskOwnerByDesk(a) > this.getDeskOwnerByDesk(b) ? -1 :
+        this.getDeskOwnerByDesk(a) < this.getDeskOwnerByDesk(b) ? 1 : 0);
+    if (condition == 'toBiggerTaskAmount')
+      this.currDesktops.sort((a, b) => a.tasks.length - b.tasks.length);
+    if (condition == 'toSmallerTaskAmount')
+      this.currDesktops.sort((a, b) => b.tasks.length - a.tasks.length);
   }
 }

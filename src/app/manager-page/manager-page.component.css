@@ -4,9 +4,64 @@
   align-items: center;
 }
 
+.sortAndFilter {
+  align-self: flex-end;
+  padding-right: 160px;
+  position: relative;
+}
+
+.sortAndFilter i {
+  font-size: 1.3rem;
+}
+
+.fa-sort:hover+.sub-sort,
+.sub-sort:hover {
+  display: block;
+}
+
+.fa-filter:hover+.sub-filter,
+.sub-filter:hover {
+  display: block;
+}
+
+.sub-sort,
+.sub-filter {
+  padding: 5px 0;
+  position: absolute;
+  top: 20px;
+  left: -10px;
+  display: none;
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.87);
+  border-radius: 7px;
+  font-family: 'Monoglyceride', Arial, sans-serif;
+  font-size: 18px;
+  list-style-type: none;
+}
+
+.sortAndFilter li {
+  width: 100%;
+}
+
+.sortAndFilter li:hover {
+  background-color: rgb(204, 204, 204);
+}
+
+.sortAndFilter a {
+  text-decoration: none;
+  color: black;
+  padding-left: 7px;
+  transition: 0.3s;
+  height: 30px;
+}
+
+.sub-sort i,
+.sub-filter i {
+  margin: 0;
+}
+
 .desktop {
   width: 90%;
-  /* height: fit-content; */
   background: rgba(255, 255, 255, 0.3);
   border-radius: 7px;
   font-family: 'Monoglyceride', Arial, sans-serif;
