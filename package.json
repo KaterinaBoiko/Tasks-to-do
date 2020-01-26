@@ -27,6 +27,7 @@
     "@material/dialog": "^4.0.0",
     "@material/snackbar": "^4.0.0",
     "font-awesome": "^4.7.0",
+    "ngx-pagination": "^5.0.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

@@ -36,6 +36,7 @@
             </li>
         </ul>
     </div>
+    <!-- <div class="desktop" *ngFor="let desk of currDesktops | paginate: { itemsPerPage: 2, currentPage: p }"> -->
     <div class="desktop" *ngFor="let desk of currDesktops">
         <div class="deskHeader">
             <div>
@@ -53,5 +54,15 @@
             <div class="taskReadiness">{{ roundNumber(task.readiness) || 0}}%</div>
             <i class="fas fa-minus" (click)="deleteTask(desk.id, task.id)"></i>
         </div>
+    </div>
+    <!-- <pagination-controls  
+    (pageChange)="p = $event"
+    autoHide="true"
+    previousLabel="Previous page"
+    nextLabel="Next page"></pagination-controls> -->
+    <div class="pagination">
+        <a href="javascript:;" (click)="prevPage()"><i class="fas fa-angle-left"></i> Previous page</a>
+        <a href="javascript:;" *ngFor="let p of pageArray" class="page" (click)="changePage(p)">  {{ p }} </a>
+        <a href="javascript:;" (click)="prevPage()">Next page <i class="fas fa-angle-right"></i></a>    
     </div>
 </div>

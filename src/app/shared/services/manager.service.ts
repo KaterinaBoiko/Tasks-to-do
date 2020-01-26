@@ -18,7 +18,7 @@ export class ManagerService {
   constructor(private deskService: DesktopService) { }
 
   getManagers(): Manager[] {
-    if (localStorage.getItem('managers') === '[]' || localStorage.getItem('managers') === null) 
+    if (localStorage.getItem('managers') === '[]' || localStorage.getItem('managers') === null)
       this.setDefaultManagers();
     this.managers = JSON.parse(localStorage.getItem('managers'));
     return this.managers;
@@ -33,9 +33,9 @@ export class ManagerService {
     let maxUsedId = Math.max(...this.managers.map(x => x.id));
     return ++maxUsedId;
   }
-  
+
   setDefaultManagers(): void {
-    let man1 = new Manager(1,'admin','1',null);
+    let man1 = new Manager(1, 'admin', '1', null);
     man1.desktopsId.push(0);
     this.addSubordinatesDesktop(man1.id, this.deskService.getNextDesktopId(), 0);
     let defaultManagers = [
@@ -52,7 +52,7 @@ export class ManagerService {
     this.saveManagers();
   }
 
-  addSubordinates(userIds: number[], currManagerId: number): void{
+  addSubordinates(userIds: number[], currManagerId: number): void {
     userIds.forEach(x => {
       this.addSubordinatesDesktop(currManagerId, this.deskService.getNextDesktopId(), x);
     });
@@ -60,5 +60,9 @@ export class ManagerService {
   }
   saveManagers(): void {
     localStorage.setItem('managers', JSON.stringify(this.managers));
+  }
+
+  setCurrentPage(page: number): void {
+    localStorage.setItem('currentPage', page.toString());
   }
 }

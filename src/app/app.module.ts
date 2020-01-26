@@ -10,6 +10,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -60,7 +61,8 @@ import { GuardService } from './shared/services/guard.service';
     MatNativeDateModule,
     MatCheckboxModule,
     MatTooltipModule,
-    MatTableModule
+    MatTableModule,
+    NgxPaginationModule
   ],
   providers: [
     UserService,

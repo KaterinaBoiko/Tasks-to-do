@@ -24,6 +24,9 @@ export class ManagerPageComponent implements OnInit {
   done100: boolean = false;
   done0: boolean = false;
 
+  pageArray: number[];
+  currentPage: number;
+
 
   constructor(public dialog: MatDialog,
     private loginService: LoginService,
@@ -33,13 +36,16 @@ export class ManagerPageComponent implements OnInit {
 
   ngOnInit() {
     this.currManager = this.managerService.managers.find(x => x.id == this.loginService.getAuthorizedPerson().id);
-    console.log(this.currManager);
     this.setCurrentDesktops();
     this.setUserIdAndBoolean();
+    this.pageArray = [...Array(Math.ceil(this.currDesktops.length / 2)).keys()].map((x, i) => i + 1);
+    this.changePage(1);
+    this.currentPage = JSON.parse(localStorage.getItem('currentPage'));
 
     this.managerService.currDesktopIdsEmitter.subscribe(() => {
       this.setCurrentDesktops();
       this.setUserIdAndBoolean();
+      this.pageArray = [...Array(Math.ceil(this.currDesktops.length / 2)).keys()].map((x, i) => i + 1);
     });
   }
 
@@ -83,9 +89,6 @@ export class ManagerPageComponent implements OnInit {
       let currUser = this.userService.users.find(u => u.id == x.userId);
       if (!this.userIdBoolean.find(q => q[0] == currUser.id))
         this.userIdBoolean.push([currUser.id, false]);
-    });
-    this.userIdBoolean.forEach(x => {
-      console.log(x[0] + " " + this.userService.users.find(q => q.id == x[0]).username + " " + x[1]);
     });
   }
 
@@ -152,5 +155,16 @@ export class ManagerPageComponent implements OnInit {
     this.currDesktops = this.deskService.desktops.filter(x =>
       this.currManager.desktopsId.includes(x.id)
     );
+  }
+
+  changePage(toPage: number): void {
+    this.setCurrentDesktops();
+    console.log(this.currDesktops);
+    console.log(toPage);
+
+    let startIndex = (toPage - 1) * 2;
+    console.log(startIndex);
+    this.currDesktops = this.currDesktops.slice(startIndex, startIndex + 2);
+    console.log(this.currDesktops);
   }
 }

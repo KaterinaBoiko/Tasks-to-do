@@ -177,3 +177,29 @@ i:hover :not(.fa-minus) {
 .task:hover .fa-minus {
   display: inline-block;
 }
+
+.pagination {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 7px;
+  font-family: 'Monoglyceride', Arial, sans-serif;
+  font-size: 18px;
+  text-align: center;
+  margin: 30px;
+}
+
+.pagination a {
+  display: inline;
+  text-decoration: none;
+  color: black;
+  margin: 2px 7px;
+  padding-left: 8px;
+}
+
+.pagination i {
+  margin: 7px;
+}
+
+.page {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+}
