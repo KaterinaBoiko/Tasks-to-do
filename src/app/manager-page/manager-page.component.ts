@@ -37,21 +37,13 @@ export class ManagerPageComponent implements OnInit {
     this.currDesktops = this.deskService.desktops.filter(x =>
       this.currManager.desktopsId.includes(x.id)
     );
-
-    this.currDesktops.forEach(x => {
-      let currUser = this.userService.users.find(u => u.id == x.userId);
-      this.userIdBoolean.push([currUser.id, false]);
-    });
+    this.setUserIdAndBoolean();
 
     this.managerService.currDesktopIdsEmitter.subscribe(() => {
       this.currDesktops = this.deskService.desktops.filter(x =>
         this.currManager.desktopsId.includes(x.id)
       );
-      this.userIdBoolean = [];
-      this.currDesktops.forEach(x => {
-        let currUser = this.userService.users.find(u => u.id == x.userId);
-        this.userIdBoolean.push([currUser.id, false]);
-      });
+      this.setUserIdAndBoolean();
     });
   }
 
@@ -87,6 +79,18 @@ export class ManagerPageComponent implements OnInit {
 
   getDeskOwnerByDesk(desk: Desktop): string {
     return this.userService.users.find(x => x.id == desk.userId).username;
+  }
+
+  setUserIdAndBoolean(): void {
+    this.userIdBoolean = [];
+    this.currDesktops.forEach(x => {
+      let currUser = this.userService.users.find(u => u.id == x.userId);
+      if (!this.userIdBoolean.find(q => q[0] == currUser.id))
+        this.userIdBoolean.push([currUser.id, false]);
+    });
+    this.userIdBoolean.forEach(x => {
+      console.log(x[0] + " " + this.userService.users.find(q => q.id == x[0]).username + " " + x[1]);
+    });
   }
 
   deleteDesk(deskId: number): void {

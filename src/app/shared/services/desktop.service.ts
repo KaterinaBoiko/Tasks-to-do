@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Desktop } from '../models/desktop.model';
 import { Task } from '../models/task.model';
 import { Subject, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,10 @@ export class DesktopService {
     this.currentDesktop = this.desktops.find(x => x.id == deskId);
     this.currDesktopSubject.next(this.currentDesktop);
     localStorage.setItem('currentDesktopId', deskId.toString());
+    this.router.navigateByUrl(`/desktop`);
   }
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   addDesktop(desk: Desktop): void {
     this.desktops.push(desk);

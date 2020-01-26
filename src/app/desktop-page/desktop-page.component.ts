@@ -110,8 +110,7 @@ export class DesktopPageComponent implements OnInit {
         event.previousIndex,
         event.currentIndex)
       currTaskId = JSON.parse(JSON.stringify(event.container.data[event.currentIndex].id));
-      let newStatus = JSON.parse(JSON.stringify(Number(event.container.id.substring(event.container.id.length - 1)) % 3));
-      console.log(newStatus);
+      let newStatus = Number(event.container.id.match(/\d+/)[0])%3;
       this.currTasks.find(x => x.id == currTaskId).status = newStatus;
       prevIndex = this.currTasks.findIndex(x => x.id === currTaskId);
       newIndex = event.currentIndex;
