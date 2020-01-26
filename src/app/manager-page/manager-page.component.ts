@@ -34,15 +34,11 @@ export class ManagerPageComponent implements OnInit {
   ngOnInit() {
     this.currManager = this.managerService.managers.find(x => x.id == this.loginService.getAuthorizedPerson().id);
     console.log(this.currManager);
-    this.currDesktops = this.deskService.desktops.filter(x =>
-      this.currManager.desktopsId.includes(x.id)
-    );
+    this.setCurrentDesktops();
     this.setUserIdAndBoolean();
 
     this.managerService.currDesktopIdsEmitter.subscribe(() => {
-      this.currDesktops = this.deskService.desktops.filter(x =>
-        this.currManager.desktopsId.includes(x.id)
-      );
+      this.setCurrentDesktops();
       this.setUserIdAndBoolean();
     });
   }
@@ -93,6 +89,10 @@ export class ManagerPageComponent implements OnInit {
     });
   }
 
+  getUsernameById(userId: number) {
+    return this.userService.users.find(x => x.id == userId).username;
+  }
+
   deleteDesk(deskId: number): void {
     let index = this.deskService.desktops.findIndex(x => x.id == deskId);
     this.deskService.desktops.splice(index, 1);
@@ -131,7 +131,26 @@ export class ManagerPageComponent implements OnInit {
   }
 
   filterDesktops() {
-    console.log(this.userIdBoolean);
-    console.log(this.done100);
+    this.setCurrentDesktops();
+    this.currDesktops = this.currDesktops.filter(x =>
+      !!this.userIdBoolean.find(q => q[0] == x.userId && q[1] == true)
+    );
+    if (this.userIdBoolean.every(z => !z[1])) {
+      this.setCurrentDesktops();
+    }
+    if (this.done0) {
+      this.currDesktops = this.currDesktops.filter(x => x.tasks.every(q => q.readiness == 0 || q.readiness == undefined));
+    }
+    if (this.done100) {
+      this.currDesktops = this.currDesktops.filter(x => x.tasks.every(q => q.readiness == 100));
+    }
+
+    console.log(this.currDesktops);
+  }
+
+  setCurrentDesktops(): void {
+    this.currDesktops = this.deskService.desktops.filter(x =>
+      this.currManager.desktopsId.includes(x.id)
+    );
   }
 }

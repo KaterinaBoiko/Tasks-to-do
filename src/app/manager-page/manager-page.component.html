@@ -18,15 +18,10 @@
                         class="fas fa-sort-amount-down"></i></a></li>
         </ul>
         <i class="fas fa-filter"></i>
-        <!-- <ul class="sub-filter">
-            <li><a href="javascript:;"> By desktop name <i class="fas fa-sort-alpha-down"></i></a></li>
-            <li><a href="javascript:;"> By desktop name <i class="fas fa-sort-alpha-down-alt"></i></a></li>
-            <li><a href="javascript:;"> By desktop owner name <i class="fas fa-sort-alpha-down"></i></a></li>
-        </ul> -->
         <ul class="sub-filter">
             <li *ngFor="let item of userIdBoolean; index as i" class="check">
                 <mat-checkbox [(ngModel)]="userIdBoolean[i][1]" (change)="filterDesktops()">
-                    <p> {{ item }} </p>
+                    <p> {{ getUsernameById(userIdBoolean[i][0]) }} </p>
                 </mat-checkbox>
             </li>
             <li>
