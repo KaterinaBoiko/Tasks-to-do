@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from './shared/services/login.service';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +9,25 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'tasks-to-do';
 
-  constructor() { }
+  constructor(private loginService: LoginService) { }
 
   ngOnInit() {
-    document.body.classList.add('bg-img'); 
-    document.body.classList.add('bg_2'); 
+    document.body.classList.add('bg-img');
+    let currDackgroundUrl = this.loginService.getAuthorizedPerson().backgroundUrl;
+    if (currDackgroundUrl) {
+      let pictureIndex = Number(currDackgroundUrl.match(/\d+/)[0]);
+      document.body.classList.add('bg_' + pictureIndex);
+    }
+    else
+      document.body.classList.add('bg_0');
+
+    this.loginService.backgroundEmitter.subscribe(pictureIndex => {
+      let classList = document.body.classList;
+      for (var i = 1; i < classList.length; i++) {
+        classList.remove(classList[i]);
+      }
+      document.body.classList.add('bg_' + pictureIndex);
+    });
   }
 
 }

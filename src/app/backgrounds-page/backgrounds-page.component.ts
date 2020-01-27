@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Subject } from 'rxjs';
+import { LoginService } from '../shared/services/login.service';
 
 @Component({
   selector: 'app-backgrounds-page',
@@ -12,10 +13,7 @@ export class BackgroundsPageComponent implements OnInit {
   currentPage: number;
   pictures: string[] = [];
 
-  constructor(private renderer: Renderer2) { }
-
-  private backgroundSubject: Subject<string> = new Subject();
-  public backgroundEmitter = this.backgroundSubject.asObservable();
+  constructor(private loginService: LoginService) { }
 
   ngOnInit() {
     this.pageArray = [...Array(Math.ceil(5 / 2)).keys()].map((x, i) => i + 1);
@@ -28,15 +26,23 @@ export class BackgroundsPageComponent implements OnInit {
 
   changePage(toPage: number): void {
     this.pictures = [];
+    this.currentPage = toPage;
 
     let startIndex = (toPage - 1) * 6;
     for (let i = startIndex; i < startIndex + 6; i++) {
-      if (this.ifImageExist(this.getImageUrl(i)))
+      if (i < 14)
         this.pictures.push(this.getImageUrl(i));
     }
-    console.log(this.pictures);
-    //this.currDesktops = this.currDesktops.slice(startIndex, startIndex + 2);
-    //console.log(this.currDesktops);
+  }
+
+  prevPage(): void {
+    if (this.currentPage != 1)
+      this.changePage(--this.currentPage);
+  }
+
+  nextPage(): void {
+    if (this.currentPage != this.pageArray.length)
+    this.changePage(++this.currentPage);
   }
 
   getImageUrl(index: number): string {
@@ -44,11 +50,10 @@ export class BackgroundsPageComponent implements OnInit {
   }
 
   changeBackground(picture: string): void {
-    this.backgroundSubject.next(picture);
-    console.log(picture);
+    this.loginService.changeBackground(picture);
   }
 
-  ifImageExist(url: string): boolean {
+  ifImageExist(url: string): boolean {//?
     let img = new Image();
     img.src = url;
     console.log(url + " " + img.height);

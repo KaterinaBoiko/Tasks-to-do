@@ -18,50 +18,58 @@
   margin: 0;
 }
 
-.bg_0{
+.bg_0 {
   background-image: url(assets/images/bg_0.jpg);
 }
 
-.bg_1{
+.bg_1 {
   background-image: url(assets/images/bg_1.jpg);
 }
 
-.bg_2{
+.bg_2 {
   background-image: url(assets/images/bg_2.jpg);
 }
 
-.bg_3{
+.bg_3 {
   background-image: url(assets/images/bg_3.jpg);
 }
 
-.bg_4{
+.bg_4 {
   background-image: url(assets/images/bg_4.jpg);
 }
 
-.bg_5{
+.bg_5 {
   background-image: url(assets/images/bg_5.jpg);
 }
 
-.bg_6{
+.bg_6 {
   background-image: url(assets/images/bg_6.jpg);
 }
 
-.bg_7{
+.bg_7 {
   background-image: url(assets/images/bg_7.jpg);
 }
 
-.bg_8{
+.bg_8 {
   background-image: url(assets/images/bg_8.jpg);
 }
 
-.bg_9{
+.bg_9 {
   background-image: url(assets/images/bg_9.jpg);
 }
 
-.bg_10{
+.bg_10 {
   background-image: url(assets/images/bg_10.jpg);
 }
 
-.bg_11{
+.bg_11 {
   background-image: url(assets/images/bg_11.jpg);
+}
+
+.bg_12 {
+  background-image: url(assets/images/bg_12.jpg);
+}
+
+.bg_13 {
+  background-image: url(assets/images/bg_13.jpg);
 }
