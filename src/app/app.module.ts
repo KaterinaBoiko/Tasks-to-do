@@ -29,6 +29,7 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { AddSubordinateDialogComponent } from './dialogs/add-subordinate-dialog/add-subordinate-dialog.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
 import { GuardService } from './shared/services/guard.service';
+import { BackgroundsPageComponent } from './backgrounds-page/backgrounds-page.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { GuardService } from './shared/services/guard.service';
     PageNotFoundComponent,
     ProfilePageComponent,
     AddSubordinateDialogComponent,
-    ContactPageComponent
+    ContactPageComponent,
+    BackgroundsPageComponent
   ],
   imports: [
     BrowserModule,

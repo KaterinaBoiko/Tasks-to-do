@@ -1,0 +1,10 @@
+<app-header></app-header>
+<p>Choose background</p>
+<div class="main">
+    <div class="img" *ngFor="let pict of pictures" [ngStyle]="{'background-image': 'url(' + pict + ')'}" (click)="changeBackground(pict)"></div>
+</div>
+<div class="pagination">
+    <a href="javascript:;" (click)="prevPage()"><i class="fas fa-angle-left"></i> Previous page</a>
+    <a href="javascript:;" *ngFor="let p of pageArray" class="page" (click)="changePage(p)"> {{ p }} </a>
+    <a href="javascript:;" (click)="prevPage()">Next page <i class="fas fa-angle-right"></i></a>
+</div>

@@ -7,6 +7,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
+import { BackgroundsPageComponent } from './backgrounds-page/backgrounds-page.component';
 import { GuardService } from './shared/services/guard.service';
 
 
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'manager', component: ManagerPageComponent, canActivate: [GuardService] },
   { path: 'profile', component: ProfilePageComponent, canActivate: [GuardService] },
   { path: 'contacts', component: ContactPageComponent},
+  { path: 'backgrounds', component: BackgroundsPageComponent},
   { path: '**', component: PageNotFoundComponent}
 ];
 

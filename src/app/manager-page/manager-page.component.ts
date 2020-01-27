@@ -24,8 +24,8 @@ export class ManagerPageComponent implements OnInit {
   done100: boolean = false;
   done0: boolean = false;
 
-  pageArray: number[];
-  currentPage: number;
+  // pageArray: number[];
+  // currentPage: number;
 
 
   constructor(public dialog: MatDialog,
@@ -38,14 +38,14 @@ export class ManagerPageComponent implements OnInit {
     this.currManager = this.managerService.managers.find(x => x.id == this.loginService.getAuthorizedPerson().id);
     this.setCurrentDesktops();
     this.setUserIdAndBoolean();
-    this.pageArray = [...Array(Math.ceil(this.currDesktops.length / 2)).keys()].map((x, i) => i + 1);
-    this.changePage(1);
-    this.currentPage = JSON.parse(localStorage.getItem('currentPage'));
+    // this.pageArray = [...Array(Math.ceil(this.currDesktops.length / 2)).keys()].map((x, i) => i + 1);
+    // this.changePage(1);
+    // this.currentPage = JSON.parse(localStorage.getItem('currentPage'));
 
     this.managerService.currDesktopIdsEmitter.subscribe(() => {
       this.setCurrentDesktops();
       this.setUserIdAndBoolean();
-      this.pageArray = [...Array(Math.ceil(this.currDesktops.length / 2)).keys()].map((x, i) => i + 1);
+      // this.pageArray = [...Array(Math.ceil(this.currDesktops.length / 2)).keys()].map((x, i) => i + 1);
     });
   }
 
@@ -111,9 +111,11 @@ export class ManagerPageComponent implements OnInit {
 
   orderBy(condition: string): void {
     if (condition == 'adding') {
-      this.currDesktops = this.deskService.desktops.filter(x =>
-        this.currManager.desktopsId.includes(x.id)
-      );
+      // this.currDesktops = this.deskService.desktops.filter(x =>
+      //   this.currManager.desktopsId.includes(x.id)
+      // );
+      this.currDesktops = this.deskService.desktops.filter(x => 
+        this.currDesktops.find(q => q.id == x.id))
     }
     if (condition == 'downDeskname') {
       this.currDesktops.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
@@ -147,8 +149,6 @@ export class ManagerPageComponent implements OnInit {
     if (this.done100) {
       this.currDesktops = this.currDesktops.filter(x => x.tasks.every(q => q.readiness == 100));
     }
-
-    console.log(this.currDesktops);
   }
 
   setCurrentDesktops(): void {
@@ -157,14 +157,14 @@ export class ManagerPageComponent implements OnInit {
     );
   }
 
-  changePage(toPage: number): void {
-    this.setCurrentDesktops();
-    console.log(this.currDesktops);
-    console.log(toPage);
+  // changePage(toPage: number): void {
+  //   this.setCurrentDesktops();
+  //   console.log(this.currDesktops);
+  //   console.log(toPage);
 
-    let startIndex = (toPage - 1) * 2;
-    console.log(startIndex);
-    this.currDesktops = this.currDesktops.slice(startIndex, startIndex + 2);
-    console.log(this.currDesktops);
-  }
+  //   let startIndex = (toPage - 1) * 2;
+  //   console.log(startIndex);
+  //   this.currDesktops = this.currDesktops.slice(startIndex, startIndex + 2);
+  //   console.log(this.currDesktops);
+  // }
 }
