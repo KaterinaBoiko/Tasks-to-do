@@ -1,13 +1,81 @@
-.carousel-wrapper {
-  overflow: hidden;
-  width: 90%;
+p {
+  font-family: 'Monoglyceride', Arial, sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  margin: 20px auto;
+  cursor: default;
+}
+
+.slider {
+  width: 75%;
+  position: relative;
   margin: auto;
 }
 
-.carousel-wrapper * {
-  box-sizing: border-box;
+.sliderItem {
+  width: 100%;
 }
 
-.carousel {
-    transform-style: preserve-3d;
+img {
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 43%;
+  width: auto;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 25px;
+  transition: 0.6s ease;
+  user-select: none;
+}
+
+.next {
+  right: 0;
+}
+
+.text {
+  color: black;
+  font-family: 'Monoglyceride', Arial, sans-serif;
+  font-size: 22px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  bottom: 20px;
+  background: rgba(255, 255, 255, 0.733);
+}
+
+.dots{
+  text-align: center;
+  margin-top: 5px;
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: 0.6s ease;
+}
+
+.active,
+.dot:hover {
+  background-color: #717171;
+}
+
+@media only screen and (max-width: 300px) {
+  .prev,
+  .next,
+  .text {
+    font-size: 11px
   }
+}

@@ -1,14 +1,14 @@
 <app-header></app-header>
-
-<div class="carousel-wrapper">
-  <div class="carousel">
-    <img class="carousel__photo initial" src="https://wallpaperaccess.com/full/109676.jpg">
-    <img class="carousel__photo" src="https://i.pinimg.com/originals/52/96/7e/52967e9aee1c617cb0668d3ef1704eba.jpg">
-    <img class="carousel__photo" src="https://i.pinimg.com/originals/3e/2a/f6/3e2af664e061013a3d05aa99fa20c1d4.jpg">
-    <img class="carousel__photo" src="https://images3.alphacoders.com/104/thumb-1920-1042283.png">
-    <img class="carousel__photo" src="https://wallpaperaccess.com/full/215112.jpg">
-
-    <div class="carousel__button--next"></div>
-    <div class="carousel__button--prev"></div>
+<p>A little guide</p>
+<div class="slider">
+  <div class="sliderItem">
+    <img src={{currImage[0]}} alt={{currImage[1]}}>
+    <div class="text"> {{ currImage[1] }} </div>
   </div>
+  <a class="prev" (click)="nextSlide(-1)">&#10094;</a>
+  <a class="next" (click)="nextSlide(1)">&#10095;</a>
+</div>
+<div class="dots">
+  <span class="dot dot{{i}}" *ngFor="let item of imagesAndCaptions; index as i" 
+  (click)="changeSlide(i)" [ngClass]="currSlide==i ? 'active' : null"></span> 
 </div>

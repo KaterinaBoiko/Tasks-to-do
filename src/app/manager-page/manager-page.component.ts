@@ -147,7 +147,7 @@ export class ManagerPageComponent implements OnInit {
       this.currDesktops = this.currDesktops.filter(x => x.tasks.every(q => q.readiness == 0 || q.readiness == undefined));
     }
     if (this.done100) {
-      this.currDesktops = this.currDesktops.filter(x => x.tasks.every(q => q.readiness == 100));
+      this.currDesktops = this.currDesktops.filter(x => x.tasks.every(q => q.readiness == 100) && x.tasks.length!=0);
     }
   }
 
