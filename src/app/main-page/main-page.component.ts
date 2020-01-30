@@ -32,7 +32,10 @@ export class MainPageComponent implements OnInit {
 
   showSlide(slideIndex: number): void {
     this.currSlide = slideIndex;
-    this.currImage = this.imagesAndCaptions[this.currSlide];
+    let promise = new Promise<[string, string]>((resolve) => {
+      resolve(this.imagesAndCaptions[this.currSlide]);
+    });
+    promise.then(result => this.currImage = result);
   }
 
   changeSlide(index: number): void {

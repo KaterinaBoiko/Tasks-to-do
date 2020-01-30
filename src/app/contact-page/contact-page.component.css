@@ -1,5 +1,6 @@
 .main {
-  width: 800px;
+  width: 70%;
+  padding-bottom: 20px;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 10px;
   margin: 100px auto;
@@ -31,6 +32,6 @@ i {
 }
 
 iframe {
-  width: 50%;
+  width: 90%;
   height: 250px;
 }

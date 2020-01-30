@@ -18,10 +18,6 @@ export class BackgroundsPageComponent implements OnInit {
   ngOnInit() {
     this.pageArray = [...Array(Math.ceil(5 / 2)).keys()].map((x, i) => i + 1);
     this.changePage(1);
-    //this.currentPage = JSON.parse(localStorage.getItem('currentPage'));
-    // for (let i = 0; i < 14; i++) {
-    //   this.pictures.push(this.getImageUrl(i));
-    // }
   }
 
   changePage(toPage: number): void {
@@ -51,13 +47,6 @@ export class BackgroundsPageComponent implements OnInit {
 
   changeBackground(picture: string): void {
     this.loginService.changeBackground(picture);
-  }
-
-  ifImageExist(url: string): boolean {//?
-    let img = new Image();
-    img.src = url;
-    console.log(url + " " + img.height);
-    return img.height != 0;
   }
 
 }

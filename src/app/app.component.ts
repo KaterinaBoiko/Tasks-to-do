@@ -13,8 +13,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     document.body.classList.add('bg-img');
-    let currDackgroundUrl = this.loginService.getAuthorizedPerson().backgroundUrl;
-    if (currDackgroundUrl) {
+    if (this.loginService.getAuthorizedPerson() && this.loginService.getAuthorizedPerson().backgroundUrl) {
+      let currDackgroundUrl = this.loginService.getAuthorizedPerson().backgroundUrl;
       let pictureIndex = Number(currDackgroundUrl.match(/\d+/)[0]);
       document.body.classList.add('bg_' + pictureIndex);
     }

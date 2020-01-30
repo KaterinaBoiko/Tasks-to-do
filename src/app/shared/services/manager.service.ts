@@ -37,7 +37,6 @@ export class ManagerService {
   setDefaultManagers(): void {
     let man1 = new Manager(1, 'admin', '1', null);
     man1.desktopsId.push(0);
-    this.addSubordinatesDesktop(man1.id, this.deskService.getNextDesktopId(), 0);
     let defaultManagers = [
       new Manager(0, 'admin', '1111', null),
       man1
